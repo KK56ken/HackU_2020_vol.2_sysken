@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "./pages/Home.vue";
 import Todo from "./pages/Todo.vue";
+import Calendar from "./pages/Calendar.vue";
 
 Vue.use(VueRouter);
 
@@ -24,6 +25,11 @@ const routes = [
     path: "/todo",
     name: "Todo",
     component: Todo,
+  },
+  {
+    path: "/calendar",
+    name: "Calendar",
+    component: Calendar,
   },
 ];
 
