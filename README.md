@@ -20,3 +20,7 @@
 9. dockerfileの下2行をコメント外す
 10. docker-compose build
 11. docker-compose up 
+
+
+## 途中から作業するとき
+git pull
