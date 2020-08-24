@@ -13,6 +13,7 @@
   </div>
 </template>
 
+
 <script>
 // @ is an alias to /src
 import HomeIcon from "@/components/HomeIcon.vue";
