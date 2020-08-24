@@ -1,20 +1,19 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark></v-app-bar>
     <v-main>
-      <!-- <HomeIcon /> -->
+      <Home />
     </v-main>
   </v-app>
 </template>
 
 <script>
-// import HomeIcon from "./components/HomeIcon";
+import Home from "./pages/Home";
 
 export default {
   name: "App",
 
   components: {
-    // HomeIcon,
+    Home,
   },
 
   data: () => ({
