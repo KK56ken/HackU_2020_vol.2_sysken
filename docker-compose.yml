@@ -1,8 +1,8 @@
 version: "3.7"
 
 services:
-  vue:
-    container_name: vue
+  web:
+    container_name: hacku_vue
     build: .
     volumes:
       - ".:/app"

@@ -8,6 +8,6 @@ RUN apk update && \
     npm install --save firebase && \
     rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app/hacku
+WORKDIR /app/raise_todo
 
 CMD [ "npm", "run" ,"serve" ]
