@@ -4,7 +4,7 @@
 1. git clone https://github.com/KK56ken/HackU_2020_vol.2_sysken.git
 2. git pull 
 
-## vue起動コマンドまで
+## vue起動コマンド
 1. docker-compose build 
 2. docker-compose up
 
