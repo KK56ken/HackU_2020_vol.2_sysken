@@ -12,10 +12,14 @@
     <v-container>
       <v-sheet class="d-flex" color="grey lighten-3" height="424"></v-sheet>
     </v-container>
-    <router-link to="/">
-      <v-btn color="green" dark>ホームに戻る</v-btn>
-    </router-link>
-    <v-btn color="green" dark>カレンダーへ</v-btn>
+    <v-container>
+      <router-link to="/">
+        <v-btn color="green" dark>ホーム</v-btn>
+      </router-link>
+      <router-link to="/Calendar">
+        <v-btn color="green" dark>カレンダー</v-btn>
+      </router-link>
+    </v-container>
   </div>
 </template>
 
