@@ -11,10 +11,14 @@
            
         </v-col>
       </v-row>
-           
+            <v-system-bar color="#8CF37C" ></v-system-bar>
+            
+            <v-sheet color="#D4D4D4" height="300"></v-sheet>
+            <p>えさの数０個</p>
             <v-avatar color="#7C5736" size="120">
              <span class="white--text headline">エサ </span> 
             </v-avatar> 
+
             <v-avatar color="#0094FF" size="78">
              <span class="white--text headline caption">コレクション </span> 
              
