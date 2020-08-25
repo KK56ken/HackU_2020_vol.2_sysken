@@ -2,7 +2,7 @@
   <v-container>
     <v-row justify="space-around">
       <v-col cols="12" sm="6" md="4" lg="3">
-        <router-link to="/Todo">
+        <router-link :to="this.pash">
           <v-avatar :color="this.color" size="150">
             <span class="white--text headline">{{name}}</span>
           </v-avatar>
@@ -16,7 +16,7 @@
 export default {
   name: "",
   data: () => ({}),
-  props : ['name','color']
+  props : ['name','color','pash']
 };
 </script>
 <style>
