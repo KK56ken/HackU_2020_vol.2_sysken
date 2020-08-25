@@ -16,6 +16,9 @@
       <router-link to="/Todo">
         <v-btn color="green" dark>Todoリスト</v-btn>
       </router-link>
+      <router-link to="/Raising">
+        <v-btn color="green" dark>育成</v-btn>
+      </router-link>
     </v-container>
   </div>
 </template>
