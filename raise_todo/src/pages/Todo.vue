@@ -79,6 +79,9 @@
       <router-link to="/Calendar">
         <v-btn color="green" dark>カレンダー</v-btn>
       </router-link>
+      <router-link to="/Raising">
+        <v-btn color="green" dark>育成</v-btn>
+      </router-link>
     </v-container>
   </div>
 </template>

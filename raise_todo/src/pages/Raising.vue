@@ -24,5 +24,16 @@
              
             </v-avatar> 
     </v-container>
+    <v-container>
+      <router-link to="/">
+        <v-btn color="green" dark>ホーム</v-btn>
+      </router-link>
+      <router-link to="/Calendar">
+        <v-btn color="green" dark>カレンダー</v-btn>
+      </router-link>
+      <router-link to="/Todo">
+        <v-btn color="green" dark>ToDoリスト</v-btn>
+      </router-link>
+    </v-container>
   </div>
 </template>
