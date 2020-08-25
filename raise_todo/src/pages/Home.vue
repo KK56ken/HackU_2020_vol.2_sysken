@@ -8,7 +8,9 @@
           <v-divider></v-divider>
         </v-col>
       </v-row>
-      <HomeIcon />
+      <HomeIcon name='ToDoリスト' color = '#F29993' />
+      <HomeIcon name='カレンダー' color = '#97D5C5'/> 
+      <HomeIcon name='育成' color = '#f8b739'/> 
     </v-container>
   </div>
 </template>
