@@ -5,7 +5,9 @@
         <router-link :to="this.pash">
           <v-avatar :color="this.color" size="150">
             <span class="white--text headline">{{name}}</span>
+
           </v-avatar>
+          
         </router-link>
       </v-col>
     </v-row>
