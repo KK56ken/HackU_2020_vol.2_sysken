@@ -11,3 +11,21 @@ RUN apk update && \
 WORKDIR /app/raise_todo
 
 CMD [ "npm", "run" ,"serve" ]
+
+# FROM node:10.15.1-alpine as builder
+# WORKDIR /app
+
+# RUN apk update && \
+#     apk add git
+
+# COPY ./package.json /app
+
+# RUN yarn
+
+# COPY . /app
+# RUN yarn build
+
+# FROM node:10.15.1-alpine
+# WORKDIR /app
+# COPY --from=builder /app /app
+# CMD ["yarn", "start"]
