@@ -1,0 +1,3 @@
+DROP SCHEMA IF EXISTS raise_todo;
+CREATE DATABASE IF NOT EXISTS raise_todo;
+

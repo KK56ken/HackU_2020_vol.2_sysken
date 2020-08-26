@@ -1,0 +1,18 @@
+
+FROM golang:1.15.0-alpine3.12 AS build
+# GolangのDockerイメージ取ってくる
+
+WORKDIR /app
+# Docker上の作業ディレクトリ設定
+
+# ローカルのファイルをdocker にコピー
+
+RUN apk update && \
+    apk add --no-cache git && \
+    go get github.com/go-sql-driver/mysql
+# go で sql 使うのに必要なライブラリ
+# go get github.com/labstack/echo/middleware
+# echo インストール
+
+CMD ["go", "run", "main.go"]
+# main.go ファイル実行 後述するがmain.goでサーバーを立てる
