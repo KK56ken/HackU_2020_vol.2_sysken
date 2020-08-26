@@ -11,9 +11,21 @@
            
         </v-col>
       </v-row>
+      
             <v-system-bar color="#8CF37C" ></v-system-bar>
             
-            <v-sheet color="#D4D4D4" height="300"></v-sheet>
+            
+              <v-sheet color="#D4D4D4" height="300">
+            <template v-slot:activator="{ on }"> 
+              
+              
+              <v-sheet color="#D4D4D4" height="300" v-on="on" ></v-sheet>
+
+            </template>
+            <div >
+              <img class="img" src="../assets/character/beeadult.png" width="300" />
+            </div>
+            </v-sheet> 
             <p>えさの数０個</p>
             <v-avatar color="#7C5736" size="120">
              <span class="white--text headline">エサ </span> 
@@ -37,3 +49,18 @@
     </v-container>
   </div>
 </template>
+
+
+
+
+<script>
+import AssetsImage from "@/assets/character/beeadult.png";
+
+export default {
+  data() {
+    return {
+      assetsImage: AssetsImage,
+    };
+  }
+};
+</script>
