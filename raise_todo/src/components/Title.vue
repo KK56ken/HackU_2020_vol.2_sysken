@@ -3,7 +3,7 @@
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <v-container>
       <v-row class="text-center">
-        <v-col cols="6" sm="6" md="4" lg="3">
+        <v-col :cols="this.size" sm="6" md="4" lg="3">
           <h1>{{titlename}}</h1>
           <v-divider></v-divider>
         </v-col>
@@ -16,6 +16,6 @@
 export default {
   name: "",
   data: () => ({}),
-  props: ["titlename"],
+  props: ["titlename", "size"],
 };
 </script>
