@@ -31,6 +31,7 @@ services:
     volumes:
       - ./mysql/mysql_data:/var/lib/mysql # データ永続化のためのボリューム
       - ./mysql/init:/docker-entrypoint-initdb.d
+      - ./mysql/conf.d:/etc/mysql/conf.d
     ports:
       - "3036:3036"
     # env_file: ./mysql/.env
