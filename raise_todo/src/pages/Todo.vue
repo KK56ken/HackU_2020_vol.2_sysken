@@ -3,12 +3,10 @@
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <v-container>
       <v-row class="text-center">
-        <v-col cols="7" sm="6" md="4" lg="3">
-          <h1>やるべきこと</h1>
-          <v-divider></v-divider>
-        </v-col>
+        <Title titlename="やるべきこと" size="12" />
+        {{this.$store.state.todos}}
         <v-col cols="5" sm="6" md="4" lg="3">
-          <v-dialog v-model="dialog" persistent max-width="600px">
+          <v-dialog v-model="dialog" max-width="600px">
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="#F29993" dark v-bind="attrs" v-on="on" fab x-large>➕</v-btn>
             </template>
@@ -20,13 +18,18 @@
                 <v-container>
                   <v-row>
                     <v-col cols="12">
-                      <v-text-field label="やること" required></v-text-field>
+                      <v-text-field label="やること" required v-model="todo"></v-text-field>
                     </v-col>
                     <v-col cols="12">
-                      <v-text-field label="いつまで" required></v-text-field>
+                      <v-text-field label="いつまで" required v-model="when"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6">
-                      <v-select :items="['国語', '算数', '理科', '社会', '英語', 'その他']" label="科目" required></v-select>
+                      <v-select
+                        :items="['国語', '算数', '理科', '社会', '英語', 'その他']"
+                        label="科目"
+                        required
+                        v-model="subject"
+                      ></v-select>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -35,7 +38,7 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="dialog = false">閉じる</v-btn>
-                <v-btn color="blue darken-1" text @click="dialog = false">保存する</v-btn>
+                <v-btn color="blue darken-1" text v-on:click="store_add_todo()">保存する</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -74,16 +77,28 @@
 
 <script>
 // @ is an alias to /src
-// import HomeIcon from "@/components/HomeIcon.vue";
+import Title from "@/components/Title.vue";
 
 export default {
-  name: "",
   components: {
-    // HomeIcon,
+    Title,
   },
   data: () => ({
+    todo: "",
+    when: "",
+    subject: "",
     dialog: false,
   }),
+  methods: {
+    store_add_todo() {
+      this.$store.commit("add_todo", {
+        todo: this.todo,
+        when: this.when,
+        subject: this.subject,
+      });
+      this.dialog = false;
+    },
+  },
 };
 </script>
 <style>
