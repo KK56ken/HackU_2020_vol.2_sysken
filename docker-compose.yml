@@ -10,3 +10,36 @@ services:
       - "8080:8080"
     tty: true
     stdin_open: true
+
+  api:
+    container_name: hacku_api
+    build: ./go
+    volumes:
+      - "./go:/app"
+    ports:
+      - "3001:3001" # 開放するポート
+    tty: true
+    stdin_open: true
+    depends_on: # dbコンテナに接続する ビルドするのもdbコンテナが立ち上がってからになる
+      - db
+    environment:
+      - "GOPATH=/go/app"
+
+  db:
+    container_name: hacku_db
+    image: mysql:latest
+    volumes:
+      - ./mysql/mysql_data:/var/lib/mysql # データ永続化のためのボリューム
+      - ./mysql/init:/docker-entrypoint-initdb.d
+    ports:
+      - "3036:3036"
+    # env_file: ./mysql/.env
+    environment:
+      TZ: "Asia/Tokyo"
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: dev
+    # MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+
+volumes:
+  mysql_data: # ローカルのディレクトリにデータを保存
