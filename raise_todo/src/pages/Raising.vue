@@ -1,12 +1,7 @@
 <template>
   <div class="raising">
     <v-container>
-      <v-row class="text-center">
-        <v-col cols="6" sm="6" md="4" lg="3">
-          <h1>育成</h1>
-          <v-divider></v-divider>
-        </v-col>
-      </v-row>
+      <Title titlename="育成" />
 
       <v-system-bar color="#8CF37C"></v-system-bar>
 
@@ -45,9 +40,14 @@
 
 
 <script>
+import Title from "@/components/Title.vue";
+
 export default {
   data() {
     return {};
+  },
+  components: {
+    Title,
   },
 };
 </script>

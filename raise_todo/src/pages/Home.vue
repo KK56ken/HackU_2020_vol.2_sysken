@@ -2,15 +2,10 @@
   <div class="home">
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <v-container>
-      <v-row class="text-center">
-        <v-col cols="6" sm="6" md="4" lg="3">
-          <h1>TitleMITEI</h1>
-          <v-divider></v-divider>
-        </v-col>
-      </v-row>
-      <HomeIcon name='ToDoリスト' color = '#F29993' pash ='/Todo'/>
-      <HomeIcon name='カレンダー' color = '#97D5C5' pash ='/Calendar'/> 
-      <HomeIcon name='育成' color = '#f8b739' pash ='/Raising'/> 
+      <Title titlename="TitleMITEI" />
+      <HomeIcon name="ToDoリスト" color="#F29993" pash="/Todo" />
+      <HomeIcon name="カレンダー" color="#97D5C5" pash="/Calendar" />
+      <HomeIcon name="育成" color="#f8b739" pash="/Raising" />
     </v-container>
   </div>
 </template>
@@ -19,11 +14,13 @@
 <script>
 // @ is an alias to /src
 import HomeIcon from "@/components/HomeIcon.vue";
+import Title from "@/components/Title.vue";
 
 export default {
   name: "Home",
   components: {
     HomeIcon,
+    Title,
   },
 };
 </script>
