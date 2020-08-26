@@ -176,5 +176,5 @@ fabric.properties
 # Local History for Visual Studio Code
 .history/
 
-db/db-data/*
-!db/db-data/.gitkeep
+mysql/mysql_data/*
+!mysql/mysql_data/.gitkeep

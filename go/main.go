@@ -18,15 +18,8 @@ type Users struct {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello, World")
-}
 
-func main() {
-	http.HandleFunc("/", handler) // ハンドラを登録してウェブページを表示させる
-	// http.GET("/poke", poke)
-	http.ListenAndServe(":3001", nil)
-
-	db, err := sql.Open("mysql", "root:@/raise_todo")
+	db, err := sql.Open("mysql", "root:root@tcp(hacku_db:3306)/raise_todo")
 	if err != nil {
 		panic(err.Error())
 	}
@@ -34,20 +27,27 @@ func main() {
 
 	defer db.Close() // 関数がリターンする直前に呼び出される
 
-	rows, err := db.Query("SELECT * FROM users") //
-	if err != nil {
-		panic(err.Error())
-	}
-	fmt.Println("rows=", rows)
+	// rows, err := db.Query("SELECT * FROM users") //
+	// if err != nil {
+	// 	panic(err.Error())
+	// }
+	// fmt.Printf("hello)
+	fmt.Fprintf(w, "rows")
+}
 
-	columns, err := rows.Columns() // カラム名を取得
-	if err != nil {
-		panic(err.Error())
-	}
+func main() {
+	http.HandleFunc("/", handler) // ハンドラを登録してウェブページを表示させる
+	// http.GET("/poke", poke)
+	http.ListenAndServe(":3001", nil)
 
-	values := make([]sql.RawBytes, len(columns))
+	// columns, err := rows.Columns() // カラム名を取得
+	// if err != nil {
+	// 	panic(err.Error())
+	// }
 
-	fmt.Println("values=", values)
+	// values := make([]sql.RawBytes, len(columns))
+
+	// fmt.Println("values=", values)
 	// //  rows.Scan は引数に `[]interface{}`が必要.
 
 	// scanArgs := make([]interface{}, len(values))
