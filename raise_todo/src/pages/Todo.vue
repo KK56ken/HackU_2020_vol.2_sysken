@@ -4,7 +4,7 @@
     <v-container>
       <v-row class="text-center">
         <Title titlename="やるべきこと" size="12" />
-        {{this.$store.state.todos}}
+        <!-- {{this.$store.state.todos}} -->
         <v-col cols="5" sm="6" md="4" lg="3">
           <v-dialog v-model="dialog" max-width="600px">
             <template v-slot:activator="{ on, attrs }">
@@ -18,10 +18,10 @@
                 <v-container>
                   <v-row>
                     <v-col cols="12">
-                      <v-text-field label="やること" required v-model="todo"></v-text-field>
+                      <v-text-field label="やること" required v-model="title"></v-text-field>
                     </v-col>
                     <v-col cols="12">
-                      <v-text-field label="いつまで" required v-model="when"></v-text-field>
+                      <v-text-field label="いつまで" required v-model="date"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6">
                       <v-select
@@ -47,17 +47,9 @@
     </v-container>
     <v-container>
       <v-sheet class="d-flex" color="grey lighten-3" height="424">
-        <v-row>
-          <v-col cols="12" sm="12" md="4" lg="3">
-            <p>あと3日</p>
-            <v-card class="mx-auto" height="80" width="350">
-              <v-card-text>
-                <span class="display-1 text--primary">書き取り</span>
-                <v-btn class="text-right" text color="deep-purple accent-4">終了</v-btn>
-              </v-card-text>
-            </v-card>
-          </v-col>
-        </v-row>
+        <v-col v-for="(one_todo,i) in this.$store.state.todos" :key="i">
+          <TodoCard :todo="one_todo" />
+        </v-col>
       </v-sheet>
     </v-container>
     <v-container>
@@ -78,22 +70,24 @@
 <script>
 // @ is an alias to /src
 import Title from "@/components/Title.vue";
+import TodoCard from "@/components/TodoCard.vue";
 
 export default {
   components: {
     Title,
+    TodoCard,
   },
   data: () => ({
-    todo: "",
-    when: "",
+    title: "",
+    date: "",
     subject: "",
     dialog: false,
   }),
   methods: {
     store_add_todo() {
       this.$store.commit("add_todo", {
-        todo: this.todo,
-        when: this.when,
+        title: this.title,
+        date: this.date,
         subject: this.subject,
       });
       this.dialog = false;
