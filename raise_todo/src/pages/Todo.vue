@@ -21,7 +21,13 @@
                       <v-text-field label="やること" required v-model="title"></v-text-field>
                     </v-col>
                     <v-col cols="12">
-                      <v-text-field label="いつまで" required v-model="date"></v-text-field>
+                      <!-- <v-text-field label="いつまで" required v-model="date"></v-text-field> -->
+                      <v-text-field v-model="date" single-line>
+                        <template v-slot:append-outer>
+                          <DatePicker v-model="date" />
+                        </template>
+                      </v-text-field>
+                      <!-- <p>日付： {{ date }}</p> -->
                     </v-col>
                     <v-col cols="12" sm="6">
                       <v-select
@@ -48,7 +54,7 @@
     <v-container>
       <v-sheet class="d-flex" color="grey lighten-3" height="424">
         <v-col v-for="(one_todo,i) in this.$store.state.todos" :key="i">
-          <TodoCard :todo="one_todo" />
+          <TodoCard :todo="one_todo"  />
         </v-col>
       </v-sheet>
     </v-container>
@@ -71,11 +77,13 @@
 // @ is an alias to /src
 import Title from "@/components/Title.vue";
 import TodoCard from "@/components/TodoCard.vue";
+import DatePicker from "@/components/DatePicker";
 
 export default {
   components: {
     Title,
     TodoCard,
+    DatePicker,
   },
   data: () => ({
     title: "",
