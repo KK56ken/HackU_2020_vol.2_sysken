@@ -9,7 +9,7 @@ INSERT INTO raise_todo.subjects (name) VALUES ("理科");
 INSERT INTO raise_todo.subjects (name) VALUES ("社会");
 
 -- tasksテーブルにインサートするもの
-INSERT INTO raise_todo.tasks (user_id ,subject_id ,name, time_limit) VALUES (1,1,"書き取り　1ページ","9月1日");
+INSERT INTO raise_todo.tasks (user_id ,subject_id ,name,time_limit,end_flag) VALUES (1,1,"書き取り　1ページ","9月1日",0);
 
 -- charactersテーブルにインサートするもの
 INSERT INTO raise_todo.characters (name, image_path,probability) VALUES ("beechild","./assets/beechild.png","0.2");
