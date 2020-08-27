@@ -5,6 +5,7 @@
       <v-card class="mx-auto" height="80" width="350">
         <v-card-text>
           <span class="display-1 text--primary">{{todo.title}}</span>
+          <span class="h4 text--primary">科目：{{todo.subject}}</span>
           <v-btn class="text-right" text color="deep-purple accent-4">終了</v-btn>
         </v-card-text>
       </v-card>
