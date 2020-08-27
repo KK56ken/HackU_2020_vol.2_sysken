@@ -90,6 +90,9 @@ export default {
         date: this.date,
         subject: this.subject,
       });
+      this.title = "";
+      this.date = "";
+      this.subject = "";
       this.dialog = false;
     },
   },
