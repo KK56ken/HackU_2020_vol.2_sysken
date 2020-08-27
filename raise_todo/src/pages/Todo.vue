@@ -4,7 +4,7 @@
     <v-container>
       <v-row class="text-center">
         <Title titlename="やるべきこと" size="12" />
-        <!-- {{this.$store.state.todos}} -->
+        <!-- {{ this.$store.state.todos }} -->
         <v-col cols="5" sm="6" md="4" lg="3">
           <v-dialog v-model="dialog" max-width="600px">
             <template v-slot:activator="{ on, attrs }">
@@ -69,10 +69,30 @@
       </v-row>
     </v-container>
     <v-container>
-      <v-sheet class="d-flex" color="grey lighten-3" height="424">
-        <v-col v-for="(one_todo, i) in this.$store.state.todos" :key="i">
-          <TodoCard :todo="one_todo" />
-        </v-col>
+      <v-sheet color="grey lighten-3" height="424">
+        <v-row class="#F29993" justify="center" align-content="center">
+          <v-col
+            cols="12"
+            sm="10"
+            md="8"
+            lg="4"
+            xl="3"
+            v-for="(one_todo, i) in this.$store.state.todos"
+            :key="i"
+          >
+            <TodoCard :todo="one_todo" />
+          </v-col>
+        </v-row>
+        <!-- <v-row
+          class="blue lighten-4"
+          style="height: 450px;"
+          justify="center"
+          align-content="center"
+        >
+          <v-col v-for="n in 3" :key="n" cols="12" sm="10" md="8" lg="4" xl="3">
+            <v-card color="blue" outlined tile height="150"></v-card>
+          </v-col>
+        </v-row> -->
       </v-sheet>
     </v-container>
     <v-container>
@@ -114,11 +134,11 @@ export default {
         date: this.date,
         subject: this.subject,
       });
-      this.$store.dispatch("post_new_todo", {
-        title: this.title,
-        date: this.date,
-        subject: this.subject,
-      });
+      // this.$store.dispatch("post_new_todo", {
+      //   title: this.title,
+      //   date: this.date,
+      //   subject: this.subject,
+      // });
       this.title = "";
       this.date = "";
       this.subject = "";
