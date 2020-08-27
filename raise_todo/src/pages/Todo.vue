@@ -8,7 +8,9 @@
         <v-col cols="5" sm="6" md="4" lg="3">
           <v-dialog v-model="dialog" max-width="600px">
             <template v-slot:activator="{ on, attrs }">
-              <v-btn color="#F29993" dark v-bind="attrs" v-on="on" fab x-large>➕</v-btn>
+              <v-btn color="#F29993" dark v-bind="attrs" v-on="on" fab x-large
+                >➕</v-btn
+              >
             </template>
             <v-card>
               <v-card-title>
@@ -18,7 +20,11 @@
                 <v-container>
                   <v-row>
                     <v-col cols="12">
-                      <v-text-field label="やること" required v-model="title"></v-text-field>
+                      <v-text-field
+                        label="やること"
+                        required
+                        v-model="title"
+                      ></v-text-field>
                     </v-col>
                     <v-col cols="12">
                       <!-- <v-text-field label="いつまで" required v-model="date"></v-text-field> -->
@@ -31,7 +37,14 @@
                     </v-col>
                     <v-col cols="12" sm="6">
                       <v-select
-                        :items="['国語', '算数', '理科', '社会', '英語', 'その他']"
+                        :items="[
+                          '国語',
+                          '算数',
+                          '理科',
+                          '社会',
+                          '英語',
+                          'その他',
+                        ]"
                         label="科目"
                         required
                         v-model="subject"
@@ -43,8 +56,12 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="dialog = false">閉じる</v-btn>
-                <v-btn color="blue darken-1" text v-on:click="store_add_todo()">保存する</v-btn>
+                <v-btn color="blue darken-1" text @click="dialog = false"
+                  >閉じる</v-btn
+                >
+                <v-btn color="blue darken-1" text v-on:click="store_add_todo()"
+                  >保存する</v-btn
+                >
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -53,8 +70,8 @@
     </v-container>
     <v-container>
       <v-sheet class="d-flex" color="grey lighten-3" height="424">
-        <v-col v-for="(one_todo,i) in this.$store.state.todos" :key="i">
-          <TodoCard :todo="one_todo"  />
+        <v-col v-for="(one_todo, i) in this.$store.state.todos" :key="i">
+          <TodoCard :todo="one_todo" />
         </v-col>
       </v-sheet>
     </v-container>
@@ -71,7 +88,6 @@
     </v-container>
   </div>
 </template>
-
 
 <script>
 // @ is an alias to /src
@@ -94,6 +110,11 @@ export default {
   methods: {
     store_add_todo() {
       this.$store.commit("add_todo", {
+        name: this.title,
+        date: this.date,
+        subject: this.subject,
+      });
+      this.$store.dispatch("post_new_todo", {
         title: this.title,
         date: this.date,
         subject: this.subject,
