@@ -4,6 +4,7 @@ import Home from "./pages/Home.vue";
 import Todo from "./pages/Todo.vue";
 import Calendar from "./pages/Calendar.vue";
 import Raiging from "./pages/Raising.vue";
+import LoginHome from "./pages/LoginHome.vue";
 
 Vue.use(VueRouter);
 
@@ -36,6 +37,11 @@ const routes = [
     path: "/raising",
     name: "Raiging",
     component: Raiging,
+  },
+  {
+    path: "/loginhome",
+    name: "LoginHome",
+    component: LoginHome,
   },
 ];
 
