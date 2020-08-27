@@ -19,12 +19,14 @@ func SelectUsersData(user_id int) (*User, error) {
 	db, err := sql.Open("mysql", "root:root@tcp(hacku_db:3306)/raise_todo")
 	if err != nil {
 		panic(err.Error())
+		return nil, err
 	}
 	defer db.Close() // 関数がリターンする直前に呼び出される
 
 	rows, err := db.Query("SELECT * FROM users WHERE user_id = ?", user_id)
 	if err != nil {
 		panic(err.Error())
+		return nil, err
 	}
 
 	defer rows.Close()
