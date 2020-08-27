@@ -1,27 +1,27 @@
 version: "3.6"
 
 services:
-  web:
-    container_name: hacku_vue
-    build: .
-    volumes:
-      - ".:/app"
-    ports:
-      - "8080:8080"
-    tty: true
-    stdin_open: true
+  # web:
+  #   container_name: hacku_vue
+  #   build: .
+  #   volumes:
+  #     - ".:/app"
+  #   ports:
+  #     - "8080:8080"
+  #   tty: true
+  #   stdin_open: true
 
   api:
     container_name: hacku_api
     build: ./go
     ports:
       - "3001:3001" # 開放するポート
+    # volumes:
+    #   - ./go:/app
     tty: true
     # stdin_open: true
     depends_on: # dbコンテナに接続する ビルドするのもdbコンテナが立ち上がってからになる
       - db
-    # environment:
-    #   - "GOPATH=/go"
 
   db:
     container_name: hacku_db
