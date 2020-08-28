@@ -1,3 +1,4 @@
+
 <template>
   <div class="collection">
     <v-container>
@@ -51,3 +52,4 @@
     </v-container>
   </div>
 </template>
+

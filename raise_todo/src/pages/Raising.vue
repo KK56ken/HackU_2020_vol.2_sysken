@@ -1,4 +1,5 @@
 <template>
+
   <div class="raising">
     <v-container>
       <Title titlename="育成" size="6" />
@@ -59,5 +60,6 @@ export default {
   components: {
     Title,
   },
+  
 };
 </script>
