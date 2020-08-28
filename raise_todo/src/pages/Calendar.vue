@@ -14,14 +14,7 @@
         <v-col>
           <v-sheet height="64">
             <v-toolbar flat color="white">
-              <v-btn
-                outlined
-                class="mr-4"
-                color="grey darken-2"
-                @click="setToday"
-              >
-                今日
-              </v-btn>
+              <v-btn outlined class="mr-4" color="grey darken-2" @click="setToday">今日</v-btn>
               <v-spacer></v-spacer>
               <v-btn fab text small color="grey darken-2" @click="prev">
                 <v-icon small>mdi-chevron-left</v-icon>
@@ -32,7 +25,7 @@
               <!-- <v-toolbar-title v-if="$refs.calendar">
                 {{ $refs.calendar.title }}
               </v-toolbar-title>
-              <v-spacer></v-spacer> -->
+              <v-spacer></v-spacer>-->
               <!-- <v-menu bottom right>
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
@@ -56,7 +49,7 @@
                     <v-list-item-title>1ヶ月</v-list-item-title>
                   </v-list-item>
                 </v-list>
-              </v-menu> -->
+              </v-menu>-->
             </v-toolbar>
           </v-sheet>
           <v-sheet height="500">
@@ -69,19 +62,13 @@
               @click:date="display"
             ></v-calendar>
             <v-dialog v-model="dialog" width="500">
-              <div v-for="(list, i) in lists" :key="i">
-                <v-card>
-                  <v-card-text>
-                    {{ list.name }}
-                  </v-card-text>
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="primary" text @click="dialog = false">
-                      戻る
-                    </v-btn>
-                  </v-card-actions>
-                </v-card>
-              </div>
+              <v-card>
+                <v-card-text v-for="(list, i) in lists" :key="i">{{ list.name }}</v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="primary" text @click="dialog = false">戻る</v-btn>
+                </v-card-actions>
+              </v-card>
             </v-dialog>
           </v-sheet>
         </v-col>
@@ -148,10 +135,18 @@ export default {
     display({ date }) {
       this.$store.state.todos.forEach((todo) => {
         if (todo.date === date) {
-          this.lists.push(todo);
+          if (this.lists.length) {
+            this.lists.forEach((list) => {
+              if (todo.name !== list.name) {
+                this.lists.push(todo);
+              }
+            });
+          } else {
+            this.lists.push(todo);
+          }
+          this.dialog = true;
         }
       });
-      this.dialog = true;
     },
     getEventColor(event) {
       return event.color;
