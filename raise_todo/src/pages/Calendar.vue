@@ -175,7 +175,12 @@ export default {
       }
 
       nativeEvent.stopPropagation();
+
+      
+
     },
+
+    
     // updateRange ({ start, end }) {
     //   const events = []
 

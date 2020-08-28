@@ -20,19 +20,22 @@
                 <v-container>
                   <v-row>
                     <v-col cols="12">
-                      <v-text-field
+                      <v-text-field :rules="toRules"
                         label="やること"
                         required
                         v-model="title"
                       ></v-text-field>
                     </v-col>
+                    
                     <v-col cols="12">
                       <!-- <v-text-field label="いつまで" required v-model="date"></v-text-field> -->
+
                       日付： {{ date }}
                       <DatePicker v-model="date" />
+
                     </v-col>
                     <v-col cols="12" sm="6">
-                      <v-select
+                      <v-select 
                         :items="[
                           '国語',
                           '算数',
@@ -44,6 +47,7 @@
                         label="科目"
                         required
                         v-model="subject"
+                        :rules="subjetRules"
                       ></v-select>
                     </v-col>
                   </v-row>
@@ -55,7 +59,11 @@
                 <v-btn color="blue darken-1" text @click="dialog = false"
                   >閉じる</v-btn
                 >
-                <v-btn color="blue darken-1" text v-on:click="store_add_todo()"
+                <v-btn 
+                color="blue darken-1" text v-on:click="store_add_todo()" 
+                
+                :disabled="!valid"
+
                   >保存する</v-btn
                 >
               </v-card-actions>
@@ -118,10 +126,28 @@ export default {
     DatePicker,
   },
   data: () => ({
+    
+    valid: true,
     title: "",
-    date: "",
+    toRules: [v => !!v || 'やることを入力してね'],
+
+    select:null,
+    items:[
+            '国語',
+            '算数',
+            '理科',
+            '社会',
+            '英語',
+            'その他',
+          ],
+    date: '',
+    dataRules: [
+      v => !!v || '日付を選択してね'
+    ],
     subject: "",
+    subjetRules: [ v => !!v || '科目を選択してね'],
     dialog: false,
+// テスト
   }),
   methods: {
     store_add_todo() {
@@ -140,6 +166,10 @@ export default {
       this.subject = "";
       this.dialog = false;
     },
+    validate () {
+      this.$refs.form.validate()
+    },
+
   },
 };
 </script>
