@@ -118,7 +118,6 @@
 import Title from "@/components/Title.vue";
 import TodoCard from "@/components/TodoCard.vue";
 import DatePicker from "@/components/DatePicker";
-
 export default {
   components: {
     Title,
@@ -130,7 +129,6 @@ export default {
     valid: true,
     title: "",
     toRules: [v => !!v || 'やることを入力してね'],
-
     select:null,
     items:[
             '国語',
@@ -169,7 +167,6 @@ export default {
     validate () {
       this.$refs.form.validate()
     },
-
   },
 };
 </script>

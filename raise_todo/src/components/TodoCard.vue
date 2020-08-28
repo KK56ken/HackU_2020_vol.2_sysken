@@ -1,14 +1,12 @@
 <template>
-  <v-row>
+  <v-row v-if="show"> 
     <v-col cols="12" sm="12" md="4" lg="3">
       <!-- <p>あと3日</p> -->
       <v-card class="mx-auto" height="80" width="350">
         <v-card-text>
-          <span class="display-1 text--primary">{{ todo.name }}</span>
-          <span class="h4 text--primary">科目：{{ todo.subject }}</span>
-          <v-btn class="text-right" text color="deep-purple accent-4"
-            >終了</v-btn
-          >
+          <span class="display-1 text--primary">{{todo.title}}</span>
+          <span class="h4 text--primary">科目：{{todo.subject}}</span>
+          <v-btn class="text-right" text color="deep-purple accent-4" @click="show=!show">終了</v-btn>
         </v-card-text>
       </v-card>
     </v-col>
@@ -18,7 +16,9 @@
 <script>
 export default {
   name: "",
-  data: () => ({}),
+  data: () => ({
+    show: true,
+  }),
   props: ["todo"],
 };
 </script>
