@@ -8,6 +8,8 @@ WORKDIR /app
 
 COPY . .
 
-RUN GOOS=linux GOARCH=amd64 go build main.go
+# RUN GOOS=linux GOARCH=amd64 go build main.go
+#
+# CMD ["./main"]
 
-CMD ["./main"]
+CMD ["go","run","main.go"]

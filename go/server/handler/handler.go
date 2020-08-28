@@ -2,11 +2,12 @@ package handler
 
 import (
 	"fmt"
-	"github.com/HackU_2020_vol.2_sysken/go/model"
 	"net/http"
+
+	"hacku_vol2/server/model"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
+func kkk(w http.ResponseWriter, r *http.Request) {
 	var values []string
 
 	values = model.Db_access()

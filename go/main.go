@@ -2,11 +2,9 @@ package main
 
 import (
 	"flag"
-	"github.com/HackU_2020_vol.2_sysken/go/server"
+	"hacku_vol2/server/server"
 	_ "github.com/go-sql-driver/mysql"
 )
-
-
 
 var (
 	// Listenするアドレス+ポート
