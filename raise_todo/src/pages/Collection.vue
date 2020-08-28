@@ -38,15 +38,3 @@
     </v-container>
   </div>
 </template>
-
-// <script>
-// export default {
-//     data: () => ({
-//     images: [
-//       { name: 'こどものはち', src: '../assets/character/beechild.png' },
-//       { name: 'おとなのはち', src: '../assets/character/beeadult.png'},
-//       { name: 'たましいのはち', src: '../assets/character/beedie.png'},
-//     ],
-//   }),
-// }
-// </script>
