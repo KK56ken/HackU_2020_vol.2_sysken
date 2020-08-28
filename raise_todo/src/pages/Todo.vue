@@ -4,7 +4,7 @@
     <v-container>
       <v-row class="text-center">
         <Title titlename="やるべきこと" size="12" />
-        <!-- {{ this.$store.state.todos }} -->
+        {{ this.$store.state.todos }}
         <v-col cols="5" sm="6" md="4" lg="3">
           <v-dialog v-model="dialog" max-width="600px">
             <template v-slot:activator="{ on, attrs }">
