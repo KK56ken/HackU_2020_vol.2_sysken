@@ -30,10 +30,11 @@
       <v-avatar color="#7C5736" size="120">
         <span class="white--text headline">エサ</span>
       </v-avatar>
-
-      <v-avatar color="#0094FF" size="78">
-        <span class="white--text headline caption">コレクション</span>
-      </v-avatar>
+      <router-link to="/Collection">
+        <v-avatar color="#0094FF" size="78">
+          <span class="white--text headline caption">コレクション</span>
+        </v-avatar>
+      </router-link>
     </v-container>
     <v-container>
       <router-link to="/">
