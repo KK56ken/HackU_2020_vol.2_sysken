@@ -147,10 +147,7 @@ export default {
     subject: "",
     subjetRules: [ v => !!v || '科目を選択してね'],
     dialog: false,
-
-   
-   
-
+// テスト
   }),
   methods: {
     store_add_todo() {
