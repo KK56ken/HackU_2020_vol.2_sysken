@@ -10,7 +10,7 @@
       </v-row>
     </v-container>
     <v-container>
-      <v-row class="fill-height">
+      <v-row>
         <v-col>
           <v-sheet height="64">
             <v-toolbar flat color="white">
@@ -69,20 +69,19 @@
               @click:date="display"
             ></v-calendar>
             <v-dialog v-model="dialog" width="500">
-              <v-card>
-                <!-- <v-card-title class="headline grey lighten-2">
-                  {{ $refs.calendar.title }}
-                </v-card-title> -->
-                <v-card-text>
-                  書き取り
-                </v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="primary" text @click="dialog = false">
-                    戻る
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
+              <div v-for="(list, i) in lists" :key="i">
+                <v-card>
+                  <v-card-text>
+                    {{ list.name }}
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="primary" text @click="dialog = false">
+                      戻る
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </div>
             </v-dialog>
           </v-sheet>
         </v-col>
@@ -109,6 +108,7 @@ export default {
   name: "",
   components: {},
   data: () => ({
+    lists: [],
     focus: "",
     dialog: false,
     type: "month",
@@ -145,12 +145,13 @@ export default {
     // this.$refs.calendar.checkChange();
   },
   methods: {
-    display() {
+    display({ date }) {
+      this.$store.state.todos.forEach((todo) => {
+        if (todo.date === date) {
+          this.lists.push(todo);
+        }
+      });
       this.dialog = true;
-    },
-    viewDay({ date }) {
-      this.focus = date;
-      this.type = "day";
     },
     getEventColor(event) {
       return event.color;
