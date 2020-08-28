@@ -15,7 +15,6 @@
           </div>
         </v-col>
       </v-row>
-<<<<<<< Updated upstream
       <br />
 
       <v-sheet color="#D4D4D4" height="300" width="350">
@@ -46,49 +45,6 @@
         <v-btn color="green" dark>ToDoリスト</v-btn>
       </router-link>
     </v-container>
-=======
-      
-            <v-system-bar color="#8CF37C" >
-             
-            </v-system-bar>
-              <v-sheet color="#D4D4D4" height="300">
-                <template v-slot:activator="{ on }"> 
-              
-              
-                  <v-sheet color="#D4D4D4" height="300" v-on="on" ></v-sheet>
-
-                </template>
-                 <v-row>
-                  <v-col>
-                     <img class="img" src="../assets/character/beeadult.png" width="300" />
-                     </v-col>
-                 </v-row>
-              </v-sheet> 
-            <v-row class="text-center">  
-              <v-col >
-              <p>えさの数０個</p>
-              <v-avatar color="#7C5736" size="120">
-              <span class="white--text headline">エサ </span> 
-               </v-avatar> 
-
-            <v-avatar color="#0094FF" size="78">
-             <span class="white--text headline caption">コレクション </span> 
-            </v-avatar> 
-            </v-col>
-            </v-row>
-      </v-container>
-         <v-container>
-          <router-link to="/">
-            <v-btn color="green" dark>ホーム</v-btn>
-          </router-link>
-          <router-link to="/Calendar">
-           <v-btn color="green" dark>カレンダー</v-btn>
-         </router-link>
-         <router-link to="/Todo">
-           <v-btn color="green" dark>ToDoリスト</v-btn>
-         </router-link>
-       </v-container>
->>>>>>> Stashed changes
   </div>
 </template>
 
