@@ -5,6 +5,7 @@ import Todo from "./pages/Todo.vue";
 import Calendar from "./pages/Calendar.vue";
 import Raiging from "./pages/Raising.vue";
 import LoginHome from "./pages/LoginHome.vue";
+import Collection from "./pages/Collection.vue";
 
 Vue.use(VueRouter);
 
@@ -42,6 +43,11 @@ const routes = [
     path: "/loginhome",
     name: "LoginHome",
     component: LoginHome,
+  },
+  {
+    path: "/collection",
+    name: "Collection",
+    component: Collection,
   },
 ];
 
