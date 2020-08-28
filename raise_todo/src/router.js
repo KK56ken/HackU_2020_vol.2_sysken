@@ -6,6 +6,8 @@ import Calendar from "./pages/Calendar.vue";
 import Raiging from "./pages/Raising.vue";
 import LoginHome from "./pages/LoginHome.vue";
 import Collection from "./pages/Collection.vue";
+import SignUp from "./pages/SignUp.vue";
+
 
 Vue.use(VueRouter);
 
@@ -48,6 +50,11 @@ const routes = [
     path: "/collection",
     name: "Collection",
     component: Collection,
+  },
+  {
+    path: "/signup",
+    name: "SignUp",
+    component: SignUp,
   },
 ];
 
