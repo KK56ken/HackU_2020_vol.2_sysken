@@ -15,7 +15,7 @@
             <v-system-bar color="#8CF37C" ></v-system-bar>
             
             
-              <v-sheet color="#D4D4D4" height="300">
+             <v-sheet color="#D4D4D4" height="300">
             <template v-slot:activator="{ on }"> 
               
               
