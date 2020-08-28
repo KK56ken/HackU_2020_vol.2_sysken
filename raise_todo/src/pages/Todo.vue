@@ -4,7 +4,7 @@
     <v-container>
       <v-row class="text-center">
         <Title titlename="やるべきこと" size="12" />
-        {{ this.$store.state.todos }}
+        <!-- {{ this.$store.state.todos }} -->
         <v-col cols="5" sm="6" md="4" lg="3">
           <v-dialog v-model="dialog" max-width="600px">
             <template v-slot:activator="{ on, attrs }">
@@ -28,12 +28,8 @@
                     </v-col>
                     <v-col cols="12">
                       <!-- <v-text-field label="いつまで" required v-model="date"></v-text-field> -->
-                      <v-text-field v-model="date" single-line>
-                        <template v-slot:append-outer>
-                          <DatePicker v-model="date" />
-                        </template>
-                      </v-text-field>
-                      <!-- <p>日付： {{ date }}</p> -->
+                      日付： {{ date }}
+                      <DatePicker v-model="date" />
                     </v-col>
                     <v-col cols="12" sm="6">
                       <v-select
