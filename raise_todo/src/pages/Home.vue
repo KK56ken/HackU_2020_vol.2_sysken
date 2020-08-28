@@ -32,4 +32,7 @@ export default {
 h1 {
   color: #6b421d !important;
 }
+a{
+  text-decoration: none;
+}
 </style>
