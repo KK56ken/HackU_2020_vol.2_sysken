@@ -17,7 +17,6 @@
         </v-col>
       </v-row>
       
-
       <v-sheet color="#D4D4D4" height="300" width="350">
         <template v-slot:activator="{ on }">
           <v-sheet color="#D4D4D4" height="300" v-on="on"></v-sheet>
