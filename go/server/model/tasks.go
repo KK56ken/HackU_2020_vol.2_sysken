@@ -2,56 +2,55 @@ package model
 
 import (
 	"database/sql"
+	"errors"
 	"log"
-	"fmt"
 )
 
 type Task struct {
-	Task_id       int
-	User_id       int
-	Subject_id    int
-	Name          string
-	Limit         string
-	End_flag      int
-	Register_date string
-	End_date      string
+	TaskId       int
+	UserId       int
+	SubjectId    int
+	Name         string
+	Limit        string
+	EndFlag      int
+	RegisterDate string
+	EndDate      string
 }
 
-type Tasks []Task
+type Tasks []*Task
 
-func SelectGettingTodo(user_id int) (*Tasks, error) {
+func SelectGettingTodo(user_id int) (Tasks, error) {
 
-	fmt.Println("11")
+	//func SelectGettingTodo() (Tasks, error) {
 
 	db, err := sql.Open("mysql", "root:root@tcp(hacku_db:3306)/raise_todo")
 	if err != nil {
 		panic(err.Error())
 	}
-	defer db.Close() // 関数がリターンする直前に呼び出される
+	//defer db.Close() // 関数がリターンする直前に呼び出される
 
-	fmt.Println("22")
-
-	// rows, err := db.Query("SELECT * FROM tasks WHERE user_id = ?", user_id)
 	rows, err := db.Query("SELECT * FROM tasks")
-	// if err == nil {
-	// 	panic(err.Error())
-	// 	return nil, err
-	// }
-	defer rows.Close()
+	//rows, err := db.Query("SELECT * FROM tasks WHERE user_id = ?", user_id)
+	if err != nil {
+		return nil, err
+	}
+	return convertToTodos(rows)
+}
 
-	fmt.Println("33")
-
+func convertToTodos(rows *sql.Rows) (Tasks, error) {
 	var tasks Tasks
-
 	for rows.Next() {
-		task := Task{}
-		if err = rows.Scan(&task.Task_id, &task.User_id ,&task.Subject_id, &task.Name, &task.Limit, &task.End_flag, &task.Register_date, &task.End_date); err != nil {
-			log.Fatal(err)
+		var task Task
+		if err := rows.Scan(&task.TaskId, &task.UserId, &task.SubjectId, &task.Name, &task.Limit, &task.EndFlag, &task.RegisterDate, &task.EndDate); err != nil {
+			log.Println(errors.New("scan failed"))
 			return nil, err
 		}
-		tasks = append(tasks, task)
+		//要素を追加
+		tasks = append(tasks, &task)
 	}
-
-	fmt.Println("44")
-	return &tasks, nil
+	if err := rows.Err(); err != nil {
+		log.Println(errors.New("rows scan failed"))
+		return nil, err
+	}
+	return tasks, nil
 }
