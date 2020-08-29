@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS raise_todo.tasks(
   name VARCHAR(255) NOT NULL,
   time_limit VARCHAR(255) NOT NULL,
   end_flag INT NOT NULL,
+  end_date VARCHAR(255) NOT NULL,
   register_date DATETIME NOT NULL default current_timestamp,
   PRIMARY KEY (`task_id`)
 );
