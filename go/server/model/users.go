@@ -1,9 +1,6 @@
 package model
 
-import (
-	"database/sql"
-	"log"
-)
+import "database/sql"
 
 type User struct {
 	User_id      int
@@ -14,32 +11,17 @@ type User struct {
 	Rgister_date string
 }
 
-func SelectUsersData(user_id int) (*User, error) {
+func InsertUserr(record *User) error {
 
 	db, err := sql.Open("mysql", "root:root@tcp(hacku_db:3306)/raise_todo")
 	if err != nil {
 		panic(err.Error())
-		return nil, err
 	}
-	defer db.Close() // 関数がリターンする直前に呼び出される
-
-	rows, err := db.Query("SELECT * FROM users WHERE user_id = ?", user_id)
+	// userテーブルへのレコードの登録を行うSQLを入力する
+	stmt, err := db.Prepare("INSERT INTO users (name, password, token , feed_num ) VALUES (?, ?, ?, ?);")
 	if err != nil {
-		panic(err.Error())
-		return nil, err
+		return err
 	}
-
-	defer rows.Close()
-
-	user := User{}
-	err = rows.Scan(&user.User_id, &user.Name, &user.Name, &user.Password, &user.Token, &user.Feed_num, &user.Rgister_date)
-	if err != nil {
-		if err == sql.ErrNoRows {
-			return nil, nil
-		}
-		log.Println(err)
-		return nil, err
-	}
-
-	return &user, nil
+	_, err = stmt.Exec(record.Name, record.Password, record.Token, record.Feed_num)
+	return err
 }
