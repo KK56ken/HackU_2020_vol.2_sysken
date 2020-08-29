@@ -20,6 +20,9 @@ func Serve(addr string) {
 	http.HandleFunc("/user/signup", post(handler.HandleUserSignup()))
 	// http.GET("/poke", poke)
 
+	//　todo登録
+	// http.HandleFunc("/todo/post", post(handler.HandleToDoPost()))
+
 	http.ListenAndServe(":3001", nil)
 
 	log.Println("Server running...")

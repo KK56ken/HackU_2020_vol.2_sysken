@@ -54,3 +54,22 @@ func convertToTodos(rows *sql.Rows) (Tasks, error) {
 	}
 	return tasks, nil
 }
+
+// func InsertTodo(record *Tasks) error {
+
+// 	//func SelectGettingTodo() (Tasks, error) {
+
+// 	db, err := sql.Open("mysql", "root:root@tcp(hacku_db:3306)/raise_todo")
+// 	if err != nil {
+// 		panic(err.Error())
+// 	}
+// 	//defer db.Close() // 関数がリターンする直前に呼び出される
+
+// 	// userテーブルへのレコードの登録を行うSQLを入力するd
+// 	stmt, err := db.Prepare("INSERT INTO tasks (name, time_limit, subject , end_flag) VALUES (?, ?, ?, ?);")
+// 	if err != nil {
+// 		return err
+// 	}
+// 	_, err = stmt.Exec(record.Name, record.Limit, record.Subject, record.EndFlag)
+// 	return err
+// }

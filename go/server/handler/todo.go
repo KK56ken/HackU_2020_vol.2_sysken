@@ -55,3 +55,29 @@ func HandleToDoGet() http.HandlerFunc {
 		})
 	}
 }
+// func HandleToDoPost() http.HandlerFunc {
+// 	return func(writer http.ResponseWriter, request *http.Request) {
+
+// 		var requestBody userInformationRequest
+// 		if err := json.NewDecoder(request.Body).Decode(&requestBody); err != nil {
+// 			log.Println(err)
+// 			response.InternalServerError(writer, "Internal Server Error")
+// 			return
+// 		}
+
+// 		err := model.InsertTodo(&model.Task{
+// 			Name:     requestBody.Name,
+// 			Limit:    requestBody.Limit,
+// 			Subject:  requestBody.Subject,
+// 			EndDate:  requestBody.EndDate
+// 		})
+// 		if err != nil {
+// 			log.Println(err)
+// 			response.InternalServerError(writer, "Internal Server Error ww")
+// 			return
+// 		}
+// 		response.Success(writer, &todoListResponse{
+// 			Todos: todoLists,
+// 		})
+// 	}
+// }
