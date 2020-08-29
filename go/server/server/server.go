@@ -2,16 +2,22 @@ package server
 
 import (
 	"fmt"
-	"hacku_vol2/server/handler"
 	"log"
 	"net/http"
-	//"github.com/HackU_2020_vol.2_sysken/go/server/handler"
+
+	"hacku_vol2/server/handler"
 )
 
 func Serve(addr string) {
 	fmt.Println("1")
 	//http.HandleFunc("/", handler.kkk)
+	// get
+	// todo全件取得
 	http.HandleFunc("/todo/get", get(handler.HandleToDoGet()))
+
+	// post
+	// user登録
+	http.HandleFunc("/user/signup", post(handler.HandleUserSignup()))
 	// http.GET("/poke", poke)
 
 	http.ListenAndServe(":3001", nil)
