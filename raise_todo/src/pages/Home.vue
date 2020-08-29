@@ -2,10 +2,20 @@
   <div class="home">
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <v-container>
+      
+        
       <Title titlename="TitleMITEI" size="6" />
+      <v-row>
+      <v-col offset="5">
       <HomeIcon name="ToDoリスト" color="#F29993" pash="/Todo" />
+      </v-col>
+      <v-col>
       <HomeIcon name="カレンダー" color="#97D5C5" pash="/Calendar" />
+      </v-col>
+      <v-col offset="5">
       <HomeIcon name="育成" color="#f8b739" pash="/Raising" />
+      </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>
