@@ -3,8 +3,8 @@
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <v-container>
       <v-row class="text-center">
-        <v-col cols="6" sm="6" md="4" lg="3">
-          <h1>Calendar</h1>
+        <v-col cols="7" sm="7" md="5" lg="4">
+          <h1>カレンダー</h1>
           <v-divider></v-divider>
         </v-col>
       </v-row>
@@ -52,7 +52,7 @@
               </v-menu>-->
             </v-toolbar>
           </v-sheet>
-          <v-sheet height="500">
+          <v-sheet height="460">
             <v-calendar
               ref="calendar"
               v-model="focus"
@@ -60,6 +60,9 @@
               :events="events"
               :event-color="getEventColor"
               @click:date="display"
+              locale="ja-jp"
+              :day-format="timestamp => new Date(timestamp.date).getDate()"
+              :month-format="timestamp => (new Date(timestamp.date).getMonth() + 1) + ' /'"
             ></v-calendar>
             <v-dialog v-model="dialog" width="500">
               <v-card>
