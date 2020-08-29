@@ -16,12 +16,15 @@
             <v-toolbar flat color="white">
               <v-btn outlined class="mr-4" color="grey darken-2" @click="setToday">今日</v-btn>
               <v-spacer></v-spacer>
-              <v-btn fab text small color="grey darken-2" @click="prev">
-                <v-icon small>mdi-chevron-left</v-icon>
+             
+              <v-btn outlined class="ma-4" fab text small color="grey darken-2" @click="prev">
+                <v-icon small>前月</v-icon>
               </v-btn>
-              <v-btn fab text small color="grey darken-2" @click="next">
-                <v-icon small>mdi-chevron-right</v-icon>
+              
+              <v-btn outlined fab text small color="grey darken-2" @click="next">
+                <v-icon small>次月</v-icon>
               </v-btn>
+              
               <!-- <v-toolbar-title v-if="$refs.calendar">
                 {{ $refs.calendar.title }}
               </v-toolbar-title>
