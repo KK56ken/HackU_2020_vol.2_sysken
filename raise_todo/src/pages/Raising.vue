@@ -4,7 +4,7 @@
       <Title titlename="育成" size="6" />
       <v-row class="flex-child">
         <v-col class="d-flex" cols="12" md="4">
-          <div v-for="i in 7" :key="i">
+          <div v-for="i in hp" :key="i">
             <v-card
               outlined
               tile
@@ -25,7 +25,7 @@
         </div>
       </v-sheet>
       <p>エサの数{{ feed_num }}個</p>
-      <v-avatar v-on:click="feed_consume()" color="#7C5736" size="120">
+      <v-avatar v-on:click="feed_consume(), timer()" color="#7C5736" size="120">
         <span class="white--text headline">エサ</span>
       </v-avatar>
       <router-link to="/Collection">
@@ -45,6 +45,8 @@
         <v-btn color="green" dark>ToDoリスト</v-btn>
       </router-link>
     </v-container>
+    {{ this.startTime }}
+    {{ this.nowTime }}
   </div>
 </template>
 
@@ -54,13 +56,38 @@ import Title from "@/components/Title.vue";
 export default {
   data() {
     return {
+      nowTime: 0,
+      // 現在時刻
+      diffTime: 0,
+      // スタートボタンを押した時刻
+      startTime: 0,
+      hp: 7,
       feed_num: 10,
+      count: 0,
     };
+  },
+  created() {
+    var date = new Date();
+    this.startTime =
+      date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    setInterval(() => {
+      var date = new Date();
+      this.nowTime =
+        date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    }, 1000);
   },
   methods: {
     feed_consume() {
       if (this.feed_num > 0) {
         this.feed_num = this.feed_num - 1;
+      }
+    },
+  },
+  watch: {
+    nowTime: function(newValue, oldValue) {
+      console.log(newValue, oldValue);
+      if (this.hp > 0) {
+        this.hp = this.hp - 1;
       }
     },
   },
