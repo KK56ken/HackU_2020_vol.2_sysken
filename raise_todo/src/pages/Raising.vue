@@ -4,7 +4,7 @@
       <Title titlename="育成" size="6" />
       <v-row class="flex-child">
         <v-col class="d-flex" cols="12" md="4">
-          <div v-for="i in hp" :key="i">
+          <div v-for="i in this.$store.state.hp" :key="i">
             <v-card
               outlined
               tile
@@ -21,10 +21,19 @@
           <v-sheet color="#D4D4D4" height="300" v-on="on"></v-sheet>
         </template>
         <div>
-          <img class="img" src="../assets/character/beechild.png" width="300" />
+          <template v-if="!this.$store.state.died">
+            <img
+              class="img"
+              src="../assets/character/beechild.png"
+              width="300"
+            />
+          </template>
+          <template v-else>
+            <img class="img" src="../assets/character/beedie.png" width="300"
+          /></template>
         </div>
       </v-sheet>
-      <p>エサの数{{ this.$store.state.food }}個</p>
+      <p>エサの数{{ this.$store.state.now_feed }}個</p>
       <v-avatar v-on:click="feed_consume()" color="#7C5736" size="120">
         <span class="white--text headline">エサ</span>
       </v-avatar>
@@ -47,6 +56,7 @@
     </v-container>
     {{ this.startTime }}
     {{ this.nowTime }}
+    {{ this.$store.state.hp }}
   </div>
 </template>
 
@@ -56,10 +66,9 @@ import Title from "@/components/Title.vue";
 export default {
   data() {
     return {
-      nowTime: 0,
       // 現在時刻
-      diffTime: 0,
-      // スタートボタンを押した時刻
+      nowTime: 0,
+      // スタートした時間
       startTime: 0,
       hp: 7,
       feed_num: 10,
@@ -74,22 +83,42 @@ export default {
       var date = new Date();
       this.nowTime =
         date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-    }, 1000);
+    }, 10000);
   },
   methods: {
     feed_consume() {
-      if (this.feed_num > 0) {
-        this.$store.state.food--;
+      if (this.$store.state.now_feed > 0) {
+        this.$store.state.now_feed--;
+        this.$store.state.hp++;
       }
     },
   },
   watch: {
     nowTime: function(newValue, oldValue) {
       console.log(newValue, oldValue);
-      if (this.hp > 0) {
-        this.hp = this.hp - 1;
+      if (this.$store.state.hp > 0) {
+        this.$store.state.hp--;
       }
     },
+    // this.$store.state.now_feed:function(){
+
+    // }
+  },
+  mounted() {
+    this.$store.watch(
+      () => {
+        return this.$store.state.hp;
+      },
+      (newValue, oldValue) => {
+        console.log(oldValue, newValue);
+        if (newValue == 0) {
+          this.$store.state.died = true;
+        }
+      },
+      {
+        deep: true,
+      }
+    );
   },
   components: {
     Title,

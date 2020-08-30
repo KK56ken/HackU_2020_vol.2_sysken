@@ -8,7 +8,10 @@ export default new Vuex.Store({
   state: {
     todos: [],
     user: { name: "", password: "", token: "" },
-    food: 0,
+    now_feed: 1,
+    ate_feed: 0,
+    hp: 7,
+    died: false,
   },
   mutations: {
     add_todo(state, todo) {
@@ -23,13 +26,16 @@ export default new Vuex.Store({
   actions: {
     post_new_todo(context, todo) {
       axios
-        .post("/todo/register", {
+        .post("http://127.0.0.1:3001/todo/register", {
           name: todo.title,
           date: todo.date,
           subject: todo.subject,
         })
-        .then(() => {
+        .then((res) => {
           console.log("送れた");
+          if (res.data) {
+            console.log(res.date);
+          }
         })
         .catch((err) => {
           if (err.response) {
