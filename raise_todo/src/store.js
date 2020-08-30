@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     todos: [],
     user: { name: "", password: "", token: "" },
+    food: 0,
   },
   mutations: {
     add_todo(state, todo) {

@@ -24,8 +24,8 @@
           <img class="img" src="../assets/character/beechild.png" width="300" />
         </div>
       </v-sheet>
-      <p>エサの数{{ feed_num }}個</p>
-      <v-avatar v-on:click="feed_consume(), timer()" color="#7C5736" size="120">
+      <p>エサの数{{ this.$store.state.food }}個</p>
+      <v-avatar v-on:click="feed_consume()" color="#7C5736" size="120">
         <span class="white--text headline">エサ</span>
       </v-avatar>
       <router-link to="/Collection">
@@ -79,7 +79,7 @@ export default {
   methods: {
     feed_consume() {
       if (this.feed_num > 0) {
-        this.feed_num = this.feed_num - 1;
+        this.$store.state.food--;
       }
     },
   },
