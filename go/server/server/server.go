@@ -19,7 +19,8 @@ func Serve(addr string) {
 	// post
 	// user登録
 	http.HandleFunc("/user/signup", post(handler.HandleUserSignup()))
-	// http.GET("/poke", poke)
+	// 餌
+	http.HandleFunc("/raise/feed", post(handler.HandleFeedChange()))
 
 	http.ListenAndServe(":3001", nil)
 

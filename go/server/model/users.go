@@ -3,7 +3,6 @@ package model
 import (
 	"database/sql"
 	"errors"
-	"fmt"
 	"log"
 )
 
@@ -35,10 +34,6 @@ func InsertUserr(record *User) error {
 
 func SelectUser(name, password string) (Users, error) {
 
-	fmt.Println("sasa")
-	fmt.Println(name)
-	fmt.Println(password)
-
 	db, err := sql.Open("mysql", "root:root@tcp(hacku_db:3306)/raise_todo")
 	if err != nil {
 		panic(err.Error())
@@ -52,9 +47,29 @@ func SelectUser(name, password string) (Users, error) {
 		log.Fatal(err)
 	}
 
-	fmt.Println(rows)
-
 	return convertToUser(rows)
+}
+
+func UpdateFeed(token string, flag, feedNum int) {
+
+	db, err := sql.Open("mysql", "root:root@tcp(hacku_db:3306)/raise_todo")
+	if err != nil {
+		panic(err.Error())
+	}
+
+	updateAfter := 0
+	if flag == 0 {
+		updateAfter = feedNum - 1
+	} else {
+		updateAfter = feedNum + 1
+	}
+
+	// UPDATE user SET point = 100 WHERE name = "山田";
+	_, err = db.Exec("UPDATE users SET feed_num = ? WHERE token = ?", updateAfter, token)
+	if err != nil {
+		log.Fatal(err)
+	}
+	//return convertToUserFeed(rows)
 }
 
 func convertToUser(rows *sql.Rows) (Users, error) {
