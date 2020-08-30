@@ -3,10 +3,11 @@ package handler
 import (
 	"errors"
 	"fmt"
-	"hacku_vol2/http/response"
-	"hacku_vol2/server/model"
 	"log"
 	"net/http"
+
+	"hacku_vol2/http/response"
+	"hacku_vol2/server/model"
 )
 
 type todoList struct {

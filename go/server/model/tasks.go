@@ -21,13 +21,10 @@ type Tasks []*Task
 
 func SelectGettingTodo(user_id int) (Tasks, error) {
 
-	//func SelectGettingTodo() (Tasks, error) {
-
 	db, err := sql.Open("mysql", "root:root@tcp(hacku_db:3306)/raise_todo")
 	if err != nil {
 		panic(err.Error())
 	}
-	//defer db.Close() // 関数がリターンする直前に呼び出される
 
 	rows, err := db.Query("SELECT * FROM tasks")
 	//rows, err := db.Query("SELECT * FROM tasks WHERE user_id = ?", user_id)

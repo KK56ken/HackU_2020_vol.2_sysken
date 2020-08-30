@@ -53,7 +53,6 @@ func HandleUserSignup() http.HandlerFunc {
 		response.Success(writer, &userInformationResponse{
 			Token: hashingPass,
 		})
-
 	}
 }
 
