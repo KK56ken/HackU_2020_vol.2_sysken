@@ -14,6 +14,7 @@ func Serve(addr string) {
 	// get
 	// todo全件取得
 	http.HandleFunc("/todo/get", get(handler.HandleToDoGet()))
+	http.HandleFunc("/user/login", get(handler.HandleUserLogin()))
 
 	// post
 	// user登録

@@ -4,6 +4,7 @@ import (
 	"crypto/md5"
 	"encoding/hex"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -13,7 +14,8 @@ import (
 )
 
 type userInformationResponse struct {
-	Token string `json:"token"`
+	Token    string `json:"token"`
+	Feed_num int    `json:"feed_num"`
 }
 
 type userInformationRequest struct {
@@ -50,6 +52,37 @@ func HandleUserSignup() http.HandlerFunc {
 
 		response.Success(writer, &userInformationResponse{
 			Token: hashingPass,
+		})
+
+	}
+}
+
+func HandleUserLogin() http.HandlerFunc {
+	return func(writer http.ResponseWriter, request *http.Request) {
+
+		// リクエストBodyから更新後情報を取得
+		var requestBody userInformationRequest
+		if err := json.NewDecoder(request.Body).Decode(&requestBody); err != nil {
+			log.Println(err)
+			response.InternalServerError(writer, "Internal Server Error")
+			return
+		}
+
+		userData, err := model.SelectUser(requestBody.Name, requestBody.Password)
+		if err != nil {
+			log.Println(err)
+			response.InternalServerError(writer, "Internal Server Error")
+			return
+		}
+		if userData == nil {
+			log.Println(errors.New("usersRanking not found"))
+			response.BadRequest(writer, fmt.Sprintf("usersRanking not found"))
+			return
+		}
+
+		response.Success(writer, &userInformationResponse{
+			Token:    userData[0].Token,
+			Feed_num: userData[0].Feed_num,
 		})
 
 	}
