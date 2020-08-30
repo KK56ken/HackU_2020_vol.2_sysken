@@ -1,5 +1,4 @@
 <template>
-
   <div class="raising">
     <v-container>
       <Title titlename="育成" size="6" />
@@ -16,7 +15,7 @@
           </div>
         </v-col>
       </v-row>
-      
+
       <v-sheet color="#D4D4D4" height="300" width="350">
         <template v-slot:activator="{ on }">
           <v-sheet color="#D4D4D4" height="300" v-on="on"></v-sheet>
@@ -25,8 +24,8 @@
           <img class="img" src="../assets/character/beechild.png" width="300" />
         </div>
       </v-sheet>
-      <p>エサの数０個</p>
-      <v-avatar color="#7C5736" size="120">
+      <p>エサの数{{ feed_num }}個</p>
+      <v-avatar v-on:click="feed_consume()" color="#7C5736" size="120">
         <span class="white--text headline">エサ</span>
       </v-avatar>
       <router-link to="/Collection">
@@ -54,11 +53,19 @@ import Title from "@/components/Title.vue";
 
 export default {
   data() {
-    return {};
+    return {
+      feed_num: 10,
+    };
+  },
+  methods: {
+    feed_consume() {
+      if (this.feed_num > 0) {
+        this.feed_num = this.feed_num - 1;
+      }
+    },
   },
   components: {
     Title,
   },
-  
 };
 </script>
