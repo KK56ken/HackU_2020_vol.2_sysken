@@ -51,3 +51,17 @@ func convertToTodos(rows *sql.Rows) (Tasks, error) {
 	}
 	return tasks, nil
 }
+func InsertTodo(record *Task) error {
+
+	db, err := sql.Open("mysql", "root:root@tcp(hacku_db:3306)/raise_todo")
+	if err != nil {
+		panic(err.Error())
+	}
+	// userテーブルへのレコードの登録を行うSQLを入力する
+	stmt, err := db.Prepare("INSERT INTO tasks (user_id, subject_id,name, time_limit, end_flag , end_date ) VALUES ( ?, ?, ?, ?, ?, ?);")
+	if err != nil {
+		return err
+	}
+	_, err = stmt.Exec(record.UserId, record.SubjectId, record.Name, record.Limit, record.EndFlag, record.EndDate)
+	return err
+}
