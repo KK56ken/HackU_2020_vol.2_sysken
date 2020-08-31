@@ -42,7 +42,6 @@
           </v-dialog>
         </v-card-text>
       </v-card>
-      
     </v-col>
   </v-row>
 </template>
@@ -56,7 +55,7 @@ export default {
   }),
   methods: {
     add_food() {
-      this.$store.state.food++;
+      this.$store.state.now_feed++;
     },
   },
   props: ["todo"],
