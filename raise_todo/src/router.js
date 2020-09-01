@@ -7,6 +7,8 @@ import Raiging from "./pages/Raising.vue";
 import LoginHome from "./pages/LoginHome.vue";
 import Collection from "./pages/Collection.vue";
 import SignUp from "./pages/SignUp.vue";
+import Capsule from "./pages/Capsule.vue";
+
 
 
 Vue.use(VueRouter);
@@ -55,6 +57,11 @@ const routes = [
     path: "/signup",
     name: "SignUp",
     component: SignUp,
+  },
+  {
+    path: "/capsule",
+    name: "Capsule",
+    component: Capsule,
   },
 ];
 
