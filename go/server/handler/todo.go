@@ -13,8 +13,8 @@ import (
 
 type todoList struct {
 	Name         string `json:"name"`
-	Limit        string `json:"Limit"`
-	Subject      string `json:"subject"`
+	Limit        string `json:"time_limite"`
+	SubjectId    int    `json:"subject_id"`
 	EndFlag      int    `json:"end_flag"`
 	RegisterDate string `json:"register_date"`
 	EndDate      string `json:"end_date"`
@@ -22,13 +22,16 @@ type todoList struct {
 type todoListResponse struct {
 	Todos []todoList `json:"todos"`
 }
-type addTodo struct {
-	UserId    int    `json:"user_id"`
-	SubjectId int    `json:"subject_id"`
+type addTodoListRequest struct {
+	Token     string `json:"token"`
 	Name      string `json:"name"`
-	Limit     string `json:"Limit"`
-	EndFlag   int    `json:"end_flag"`
-	EndDate   string `json:"end_date"`
+	Limit     string `json:"time_limite"`
+	SubjectId int    `json:"subject_id"`
+}
+type addTodoListResponse struct {
+	Name      string `json:"name"`
+	Limit     string `json:"time_limite"`
+	SubjectId int    `json:"subject_id"`
 }
 
 func HandleToDoGet() http.HandlerFunc {
@@ -42,6 +45,7 @@ func HandleToDoGet() http.HandlerFunc {
 			response.InternalServerError(writer, "Internal Server Error")
 			return
 		}
+
 		if todoListAlls == nil {
 			log.Println(errors.New("usersRanking not found"))
 			response.BadRequest(writer, fmt.Sprintf("usersRanking not found"))
@@ -51,12 +55,12 @@ func HandleToDoGet() http.HandlerFunc {
 		todoLists := make([]todoList, len(todoListAlls))
 		for i, to := range todoListAlls {
 			todoLists[i] = todoList{
-				Name:         to.Name,                 //タスク名
-				Limit:        to.Limit,                //期限2020,08,31
-				Subject:      "todoListAlls[i].Limit", //科目
-				EndFlag:      to.EndFlag,              //終わっているかどうか
-				RegisterDate: to.RegisterDate,         //登録日時
-				EndDate:      to.EndDate,              //終了日時
+				Name:         to.Name,         //タスク名
+				Limit:        to.Limit,        //期限2020,08,31
+				SubjectId:    1,               //科目
+				EndFlag:      to.EndFlag,      //終わっているかどうか
+				RegisterDate: to.RegisterDate, //登録日時
+				EndDate:      to.EndDate,      //終了日時
 			}
 		}
 
@@ -69,30 +73,34 @@ func HandleToDoPost() http.HandlerFunc {
 	return func(writer http.ResponseWriter, request *http.Request) {
 
 		// リクエストBodyから更新後情報を取得
-		var requestBody addTodo
+		var requestBody addTodoListRequest
 		if err := json.NewDecoder(request.Body).Decode(&requestBody); err != nil {
 			log.Println(err)
 			response.InternalServerError(writer, "Internal Server Error")
 			return
 		}
+		user_id := model.SelectUserId(requestBody.Token)
+		subject_id := requestBody.SubjectId
+		name := requestBody.Name
+		limit := requestBody.Limit
 
 		err := model.InsertTodo(&model.Task{
-			UserId:    requestBody.UserId,
+			UserId:    user_id,
 			SubjectId: requestBody.SubjectId,
 			Name:      requestBody.Name,
 			Limit:     requestBody.Limit,
-			EndFlag:   requestBody.EndFlag,
-			EndDate:   requestBody.EndDate,
 		})
-		fmt.Println(requestBody.UserId)
+
 		if err != nil {
 			log.Println(err)
 			response.InternalServerError(writer, "Internal Server Error ww")
 			return
 		}
 
-		response.Success(writer, &addTodo{
-			Name: requestBody.Name,
+		response.Success(writer, &addTodoListResponse{
+			SubjectId: subject_id,
+			Name:      name,
+			Limit:     limit,
 		})
 	}
 }

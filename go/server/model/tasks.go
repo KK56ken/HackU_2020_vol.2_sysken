@@ -3,7 +3,9 @@ package model
 import (
 	"database/sql"
 	"errors"
+	"fmt"
 	"log"
+	"strconv"
 )
 
 type Task struct {
@@ -51,17 +53,37 @@ func convertToTodos(rows *sql.Rows) (Tasks, error) {
 	}
 	return tasks, nil
 }
-func InsertTodo(record *Task) error {
+
+//tokenをuser_idに変換する
+func SelectUserId(token string) int {
 
 	db, err := sql.Open("mysql", "root:root@tcp(hacku_db:3306)/raise_todo")
 	if err != nil {
 		panic(err.Error())
 	}
+	var user_id string
 	// userテーブルへのレコードの登録を行うSQLを入力する
-	stmt, err := db.Prepare("INSERT INTO tasks (user_id, subject_id,name, time_limit, end_flag , end_date ) VALUES ( ?, ?, ?, ?, ?, ?);")
+	// 単レコード取得の書き方がわからない
+	// todo 書く
+	if err := db.QueryRow("SELECT user_id FROM users WHERE token = ? ", token).Scan(&user_id); err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(user_id, token)
+	var i int
+	i, _ = strconv.Atoi(user_id)
+	return i
+}
+
+func InsertTodo(record *Task) error {
+	db, err := sql.Open("mysql", "root:root@tcp(hacku_db:3306)/raise_todo")
+	if err != nil {
+		panic(err.Error())
+	}
+	// userテーブルへのレコードの登録を行うSQLを入力する
+	stmt, err := db.Prepare("INSERT INTO tasks (user_id, subject_id, name, time_limite, end_flag , end_date ) VALUES ( ?, ?, ?, ?, ?, ?);")
 	if err != nil {
 		return err
 	}
-	_, err = stmt.Exec(record.UserId, record.SubjectId, record.Name, record.Limit, record.EndFlag, record.EndDate)
+	_, err = stmt.Exec(record.UserId, record.SubjectId, record.Name, record.Limit, 0, "0")
 	return err
 }
