@@ -145,11 +145,11 @@ export default {
           date: this.date,
           subject: this.subject,
         });
-        // this.$store.dispatch("post_new_todo", {
-        //   title: this.title,
-        //   date: this.date,
-        //   subject: this.subject,
-        // });
+        this.$store.dispatch("post_new_todo", {
+          title: this.title,
+          date: this.date,
+          subject: this.subject,
+        });
         this.title = "";
         this.date = "";
         this.subject = "";
