@@ -100,15 +100,16 @@
       </v-sheet>
     </v-container>
     <v-container>
+       <v-bottom-navigation
+      horizontal
+    >
       <router-link to="/">
-        <v-btn color="green" dark>ホーム</v-btn>
+        <v-btn dark > 
+          <span>ホーム</span>
+          
+        </v-btn>
       </router-link>
-      <router-link to="/Calendar">
-        <v-btn color="green" dark>カレンダー</v-btn>
-      </router-link>
-      <router-link to="/Raising">
-        <v-btn color="green" dark>育成</v-btn>
-      </router-link>
+       </v-bottom-navigation>
     </v-container>
   </div>
 </template>
