@@ -34,25 +34,33 @@
         </div>
       </v-sheet>
       <p>エサの数{{ this.$store.state.now_feed }}個</p>
+      <v-row>
+        <v-col offset="3">
       <v-avatar v-on:click="feed_consume()" color="#7C5736" size="120">
         <span class="white--text headline">エサ</span>
       </v-avatar>
+        </v-col>
+        <v-col>
       <router-link to="/Collection">
         <v-avatar color="#0094FF" size="78">
           <span class="white--text headline caption">コレクション</span>
         </v-avatar>
       </router-link>
+        </v-col>
+      </v-row>
     </v-container>
     <v-container>
-      <router-link to="/">
+      <!-- <router-link to="/">
         <v-btn color="green" dark>ホーム</v-btn>
       </router-link>
       <router-link to="/Calendar">
         <v-btn color="green" dark>カレンダー</v-btn>
       </router-link>
       <router-link to="/Todo">
-        <v-btn color="green" dark>ToDoリスト</v-btn>
-      </router-link>
+        <v-btn color="green" dark>ToDoリスト</v-btn> 
+        
+      </router-link> -->
+      <Menubar btnname="ホーム"></Menubar>
     </v-container>
     {{ this.startTime }}
     {{ this.nowTime }}
@@ -62,9 +70,12 @@
 
 <script>
 import Title from "@/components/Title.vue";
+import Menubar from "@/components/Menubar.vue";
 
 export default {
+
   data() {
+    
     return {
       // 現在時刻
       nowTime: 0,
@@ -122,6 +133,7 @@ export default {
   },
   components: {
     Title,
+    Menubar
   },
 };
 </script>

@@ -4,7 +4,7 @@
     <v-container>
       
         
-      <Title titlename="TitleMITEI" size="6" />
+      <Title titlename="スッカ" size="6" />
       <v-row>
       <v-col offset="5">
       <HomeIcon name="ToDoリスト" color="#F29993" pash="/Todo" />
