@@ -5,7 +5,8 @@
         <v-icon>mdi-calendar</v-icon>
       </v-btn>
     </template>
-    <v-date-picker v-model="picker" @click="menu = false" />
+    <v-date-picker v-model="picker" @click="menu = false" 
+    locale="ja-jp" :day-format="date => new Date(date).getDate()" />
   </v-menu>
 </template>
 <script>
@@ -34,3 +35,12 @@ export default {
   },
 };
 </script>
+
+<style>
+.v-date-picker-table.v-date-picker-table--date > table > tbody tr td:nth-child(7) .v-btn__content {
+    color:blue
+}
+.v-date-picker-table.v-date-picker-table--date > table > tbody tr td:nth-child(1) .v-btn__content {
+    color:red
+}
+</style>
