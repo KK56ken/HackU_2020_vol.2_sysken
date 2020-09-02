@@ -110,7 +110,7 @@
         </v-btn>
       </router-link>
        </v-bottom-navigation> -->
-       <Menubar></Menubar>
+       <Menubar btnname="ホーム"></Menubar>
     </v-container>
   </div>
 </template>

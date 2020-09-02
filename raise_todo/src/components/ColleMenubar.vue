@@ -8,6 +8,11 @@
           <span>{{btnname}}</span>
         </v-btn>
       </router-link>
+       <router-link to="/Raising">
+        <v-btn dark > 
+          <span>{{Rname}}</span>
+        </v-btn>
+      </router-link>
     </v-bottom-navigation>
     </v-container>
 </template>
@@ -16,6 +21,6 @@
 export default {
   name: "",
   data: () => ({}),
-  props: ["btnname"],
+  props: ["btnname","Rname"],
 };
 </script>

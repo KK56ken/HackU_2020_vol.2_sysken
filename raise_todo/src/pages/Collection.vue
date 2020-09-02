@@ -76,16 +76,16 @@
       </v-sheet>
     </v-container>
     <v-container>
-      <router-link to="/">
-        <v-btn color="green" dark>ホーム</v-btn>
-      </router-link>
-      <router-link to="/Calendar">
-        <v-btn color="green" dark>カレンダー</v-btn>
-      </router-link>
-      <router-link to="/Todo">
-        <v-btn color="green" dark>ToDoリスト</v-btn>
-      </router-link>
+     <ColleMenubar btnname="ホーム" Rname="育成"></ColleMenubar>
     </v-container>
   </div>
 </template>
 
+<script>
+import ColleMenubar from "@/components/ColleMenubar.vue";
+export default {
+  components:{
+  ColleMenubar
+  },
+}
+</script>

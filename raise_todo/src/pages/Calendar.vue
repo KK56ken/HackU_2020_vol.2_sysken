@@ -79,9 +79,10 @@
           </v-sheet>
         </v-col>
       </v-row>
+      
     </v-container>
     <v-container>
-      <router-link to="/">
+      <!-- <router-link to="/">
         <v-btn color="green" dark>ホーム</v-btn>
       </router-link>
       <router-link to="/Todo">
@@ -89,17 +90,21 @@
       </router-link>
       <router-link to="/Raising">
         <v-btn color="green" dark>育成</v-btn>
-      </router-link>
+      </router-link> -->
+       <Menubar btnname="ホーム"></Menubar>
     </v-container>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import Menubar from "@/components/Menubar.vue";
 
 export default {
   name: "",
-  components: {},
+  components: {
+    Menubar
+  },
   data: () => ({
     lists: [],
     focus: "",
@@ -109,6 +114,7 @@ export default {
       month: "1ヶ月",
       week: "1週間",
       day: "1日",
+      
     },
     selectedEvent: {},
     selectedElement: null,
