@@ -1,6 +1,6 @@
-<template>
-  <v-app>
-    <v-sheet color="#FFF7E8">
+<template >
+  <v-app >
+   <v-sheet height="100%" color="#FFF7E8">
     <v-main>
       <router-view></router-view>
     </v-main>
