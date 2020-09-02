@@ -100,7 +100,7 @@
       </v-sheet>
     </v-container>
     <v-container>
-       <v-bottom-navigation
+       <!-- <v-bottom-navigation
       horizontal
     >
       <router-link to="/">
@@ -109,7 +109,8 @@
           
         </v-btn>
       </router-link>
-       </v-bottom-navigation>
+       </v-bottom-navigation> -->
+       <Menubar></Menubar>
     </v-container>
   </div>
 </template>
@@ -119,11 +120,13 @@
 import Title from "@/components/Title.vue";
 import TodoCard from "@/components/TodoCard.vue";
 import DatePicker from "@/components/DatePicker";
+import Menubar from "@/components/Menubar.vue";
 export default {
   components: {
     Title,
     TodoCard,
     DatePicker,
+    Menubar
   },
   data: () => ({
     valid: true,
