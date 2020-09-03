@@ -128,7 +128,7 @@ export default {
         this.$store.state.now_feed--;
         this.$store.state.ate_feed++;
         this.$store.state.hp++;
-      }else if(this.$store.state.hp===7){
+        }else if(this.$store.state.hp===7){
         this.alert=true;
       }
     },
@@ -153,6 +153,7 @@ export default {
         console.log(oldValue, newValue);
         if (newValue == 0) {
           this.$store.state.died = true;
+          this.$store.state.now_feed=0;
         }
       },
       {
