@@ -14,17 +14,38 @@
         <v-col>
           <v-sheet height="64">
             <v-toolbar flat color="white">
-              <v-btn outlined class="mr-4" color="grey darken-2" @click="setToday">今日</v-btn>
+              <v-btn
+                outlined
+                class="mr-4"
+                color="grey darken-2"
+                @click="setToday"
+                >今日</v-btn
+              >
               <v-spacer></v-spacer>
-             
-              <v-btn outlined class="ma-4" fab text small color="grey darken-2" @click="prev">
+
+              <v-btn
+                outlined
+                class="ma-4"
+                fab
+                text
+                small
+                color="grey darken-2"
+                @click="prev"
+              >
                 <v-icon small>前月</v-icon>
               </v-btn>
-              
-              <v-btn outlined fab text small color="grey darken-2" @click="next">
+
+              <v-btn
+                outlined
+                fab
+                text
+                small
+                color="grey darken-2"
+                @click="next"
+              >
                 <v-icon small>次月</v-icon>
               </v-btn>
-              
+
               <!-- <v-toolbar-title v-if="$refs.calendar">
                 {{ $refs.calendar.title }}
               </v-toolbar-title>
@@ -64,22 +85,27 @@
               :event-color="getEventColor"
               @click:date="display"
               locale="ja-jp"
-              :day-format="timestamp => new Date(timestamp.date).getDate()"
-              :month-format="timestamp => (new Date(timestamp.date).getMonth() + 1) + ' /'"
+              :day-format="(timestamp) => new Date(timestamp.date).getDate()"
+              :month-format="
+                (timestamp) => new Date(timestamp.date).getMonth() + 1 + ' /'
+              "
             ></v-calendar>
             <v-dialog v-model="dialog" width="500">
               <v-card>
-                <v-card-text v-for="(list, i) in lists" :key="i">{{ list.name }}</v-card-text>
+                <v-card-text v-for="(list, i) in today_list" :key="i">{{
+                  list
+                }}</v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="primary" text @click="dialog = false">戻る</v-btn>
+                  <v-btn color="primary" text @click="dialog = false"
+                    >戻る</v-btn
+                  >
                 </v-card-actions>
               </v-card>
             </v-dialog>
           </v-sheet>
         </v-col>
       </v-row>
-      
     </v-container>
     <v-container>
       <!-- <router-link to="/">
@@ -91,8 +117,9 @@
       <router-link to="/Raising">
         <v-btn color="green" dark>育成</v-btn>
       </router-link> -->
-       <Menubar btnname="ホーム"></Menubar>
+      <Menubar btnname="ホーム"></Menubar>
     </v-container>
+    {{ today_list }}
   </div>
 </template>
 
@@ -103,7 +130,7 @@ import Menubar from "@/components/Menubar.vue";
 export default {
   name: "",
   components: {
-    Menubar
+    Menubar,
   },
   data: () => ({
     lists: [],
@@ -114,8 +141,8 @@ export default {
       month: "1ヶ月",
       week: "1週間",
       day: "1日",
-      
     },
+    today_list: [],
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
@@ -143,21 +170,15 @@ export default {
   mounted() {
     // this.$refs.calendar.checkChange();
   },
+  created() {},
   methods: {
     display({ date }) {
+      this.today_list = [];
       this.$store.state.todos.forEach((todo) => {
         if (todo.date === date) {
-          if (this.lists.length) {
-            this.lists.forEach((list) => {
-              if (todo.name !== list.name) {
-                this.lists.push(todo);
-              }
-            });
-          } else {
-            this.lists.push(todo);
-          }
-          this.dialog = true;
+          this.today_list.push(todo.name);
         }
+        this.dialog = true;
       });
     },
     getEventColor(event) {
@@ -185,14 +206,9 @@ export default {
       } else {
         open();
       }
-
       nativeEvent.stopPropagation();
-
-      
-
     },
 
-    
     // updateRange ({ start, end }) {
     //   const events = []
 
