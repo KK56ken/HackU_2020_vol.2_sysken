@@ -77,11 +77,21 @@
       </v-row>
     </v-container>
     <v-container>
-      <v-sheet color="grey lighten-3" height="424">
+      <v-sheet
+        id="scroll-target"
+        class="overflow-y-auto"
+        color="grey lighten-3"
+        height="424"
+      >
         <template v-if="this.$store.state.nodl"
           >のこり {{ this.$store.state.nodl }}日</template
         >
-        <v-row class="#F29993" justify="center" align-content="center">
+        <v-row
+          class="#F29993"
+          justify="center"
+          align-content="center"
+          v-scroll:#scroll-target="onScroll"
+        >
           <v-col
             cols="12"
             sm="10"
@@ -136,6 +146,7 @@ export default {
     Menubar,
   },
   data: () => ({
+    offsetTop: 0,
     valid: true,
     title: "",
     subject_num: 0,
@@ -230,6 +241,9 @@ export default {
     },
     resetValidation() {
       this.$refs.form.resetValidation();
+    },
+    onScroll(e) {
+      this.offsetTop = e.target.scrollTop;
     },
   },
 
