@@ -62,7 +62,7 @@
                 <v-btn
                   color="blue darken-1"
                   text
-                  v-on:click="store_add_todo()"
+                  v-on:click="store_add_todo(), number_of_days_left()"
                   :disabled="!valid"
                   >保存する</v-btn
                 >
@@ -74,6 +74,9 @@
     </v-container>
     <v-container>
       <v-sheet color="grey lighten-3" height="424">
+        <template v-if="this.$store.state.nodl"
+          >のこり {{ this.$store.state.nodl }}日</template
+        >
         <v-row class="#F29993" justify="center" align-content="center">
           <v-col
             cols="12"
@@ -112,7 +115,6 @@
        </v-bottom-navigation> -->
       <Menubar btnname="ホーム"></Menubar>
     </v-container>
-    {{ subject_num }}
   </div>
 </template>
 
@@ -141,7 +143,6 @@ export default {
     subject: "",
     subjetRules: [(v) => !!v || "科目を選択してね"],
     dialog: false,
-    // テスト
   }),
   methods: {
     store_add_todo() {
@@ -182,9 +183,56 @@ export default {
         this.dialog = false;
       }
     },
+    number_of_days_left() {
+      var tmp = this.$store.state.todos[0].date.substr(5, 7);
+      var todo_month = Number(tmp.substr(0, 2));
+      var todo_today = Number(this.$store.state.todos[0].date.substr(8, 9));
+      if (this.$store.state.month === todo_month) {
+        //nodlはnumber_of_days_leftの略残りの日数を表している
+        this.$store.state.nodl = todo_today - this.$store.state.today;
+        console.log(this.$store.state.nodl);
+      } else {
+        while (todo_month !== this.$store.state.month) {
+          switch (todo_month) {
+            case 2:
+              if (this.$store.state.year % 4 == 0) {
+                this.$store.state.nodl += 29;
+              } else {
+                this.$store.state.nodl += 28;
+              }
+              break;
+            case 4:
+              this.$store.state.nodl += 30;
+              break;
+            case 6:
+              this.$store.state.nodl += 30;
+              break;
+            case 9:
+              this.$store.state.nodl += 30;
+              break;
+            case 11:
+              this.$store.state.nodl += 30;
+              break;
+            default:
+              this.$store.state.nodl += 31;
+              break;
+          }
+          todo_month--;
+        }
+        this.$store.state.nodl -= Math.abs(
+          todo_today - this.$store.state.today
+        );
+      }
+    },
     validate() {
       this.$refs.form.validate();
     },
+  },
+  created() {
+    var date = new Date();
+    this.$store.state.year = date.getFullYear();
+    this.$store.state.month = date.getMonth() + 1;
+    this.$store.state.today = date.getDate();
   },
 };
 </script>

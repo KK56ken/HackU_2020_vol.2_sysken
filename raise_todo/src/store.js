@@ -12,6 +12,10 @@ export default new Vuex.Store({
     ate_feed: 0,
     hp: 7,
     died: false,
+    today: 0,
+    month: 0,
+    year: 0,
+    nodl: 0,
   },
   mutations: {
     add_todo(state, todo) {
