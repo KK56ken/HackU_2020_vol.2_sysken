@@ -2,17 +2,21 @@
   <v-row v-if="show">
     <v-col cols="12" sm="12" md="4" lg="3">
       <!-- <p>あと3日</p> -->
-      <v-card class="mx-auto" height="80" width="350">
+      <v-card class="mx-auto" height="100" width="350">
         <v-card-text>
-          <span class="display-1 text--primary">{{ todo.name }}</span>
+          <div class="todo_name  text--primary">
+            {{ todo.name }}
+            <v-btn
+              class="text-right"
+              text
+              color="deep-purple accent-4"
+              @click.stop="dialog = true"
+              >終了</v-btn
+            >
+          </div>
+          <span class="end_date text--primary"> 提出日：{{ todo.date }} </span>
           <span class="h4 text--primary">科目：{{ todo.subject }}</span>
-          <v-btn
-            class="text-right"
-            text
-            color="deep-purple accent-4"
-            @click.stop="dialog = true"
-            >終了</v-btn
-          >
+
           <v-dialog v-model="dialog" max-width="290">
             <v-card>
               <v-card-title class="headline">本当に消していいの？</v-card-title>
@@ -28,7 +32,7 @@
                   color="green darken-1"
                   text
                   @click="
-                    add_food(), (dialog = false);
+                    card_destroy(), add_food(), (dialog = false);
                     show = !show;
                   "
                 >
@@ -57,7 +61,24 @@ export default {
     add_food() {
       this.$store.state.now_feed++;
     },
+    card_destroy() {
+      this.$destroy;
+    },
   },
   props: ["todo"],
 };
 </script>
+
+<style>
+.todo_name {
+  padding-top: 10px;
+  padding-left: 0;
+  padding-right: 100px;
+  padding-bottom: 10px;
+  font-size: 30px;
+}
+.end_date {
+  font-size: 18px;
+  padding-right: 20px;
+}
+</style>
