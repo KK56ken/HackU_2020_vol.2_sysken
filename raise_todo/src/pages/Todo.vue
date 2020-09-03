@@ -112,6 +112,7 @@
        </v-bottom-navigation> -->
        <Menubar btnname="ホーム"></Menubar>
     </v-container>
+    {{ subject_num }}
   </div>
 </template>
 
@@ -131,6 +132,7 @@ export default {
   data: () => ({
     valid: true,
     title: "",
+    subject_num: 0,
     toRules: [(v) => !!v || "やることを入力してね"],
     select: null,
     items: ["国語", "算数", "理科", "社会", "英語", "その他"],
@@ -143,20 +145,40 @@ export default {
   }),
   methods: {
     store_add_todo() {
+      switch (this.subject) {
+        case "国語":
+          this.subject_num = 1;
+          break;
+        case "数学":
+          this.subject_num = 2;
+          break;
+        case "英語":
+          this.subject_num = 3;
+          break;
+        case "理科":
+          this.subject_num = 4;
+          break;
+        case "社会":
+          this.subject_num = 5;
+          break;
+        default:
+          this.subject_num = 6;
+      }
       if (this.title && this.date && this.subject) {
         this.$store.commit("add_todo", {
           name: this.title,
           date: this.date,
-          subject: this.subject,
+          subject: this.subject_num,
         });
         this.$store.dispatch("post_new_todo", {
           title: this.title,
           date: this.date,
-          subject: this.subject,
+          subject: this.subject_num,
         });
         this.title = "";
         this.date = "";
         this.subject = "";
+        this.subject_num = 0;
         this.dialog = false;
       }
     },
