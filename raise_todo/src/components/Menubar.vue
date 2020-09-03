@@ -1,16 +1,14 @@
 <template>
 <v-container>
-    <v-bottom-navigation
-    horizontal
-    >
-    
-      <router-link to="/">
-        <v-btn > 
-          <v-icon>mdi-home</v-icon> 
-          {{btnname}}
+  <router-link to="/">
+        <v-btn  
+        width="360"
+        height="50"
+        > 
+        <v-icon>mdi-home</v-icon>
+          <h2 font-weight="50">{{btnname}}</h2>
         </v-btn>
-      </router-link>
-    </v-bottom-navigation>
+    </router-link>
     </v-container>
 </template>
 
