@@ -100,17 +100,17 @@
       </v-sheet>
     </v-container>
     <v-container>
-       <!-- <v-bottom-navigation
+      <!-- <v-bottom-navigation
       horizontal
     >
       <router-link to="/">
-        <v-btn dark > 
+        <v-btn dark >
           <span>ホーム</span>
-          
+
         </v-btn>
       </router-link>
        </v-bottom-navigation> -->
-       <Menubar btnname="ホーム"></Menubar>
+      <Menubar btnname="ホーム"></Menubar>
     </v-container>
     {{ subject_num }}
   </div>
@@ -127,7 +127,7 @@ export default {
     Title,
     TodoCard,
     DatePicker,
-    Menubar
+    Menubar,
   },
   data: () => ({
     valid: true,
@@ -168,7 +168,7 @@ export default {
         this.$store.commit("add_todo", {
           name: this.title,
           date: this.date,
-          subject: this.subject_num,
+          subject: this.subject,
         });
         this.$store.dispatch("post_new_todo", {
           title: this.title,
