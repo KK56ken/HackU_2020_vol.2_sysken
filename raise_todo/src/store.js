@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
     todos: [],
     user: { name: "", password: "", token: "" },
-    now_feed: 1,
+    now_feed: 20,
     ate_feed: 0,
     hp: 7,
     died: false,
@@ -16,7 +16,9 @@ export default new Vuex.Store({
     month: 0,
     year: 0,
     nodl: 0,
+   
   },
+  
   mutations: {
     add_todo(state, todo) {
       // 状態を変更する

@@ -30,25 +30,39 @@
         <template v-slot:activator="{ on }">
           <v-sheet color="#D4D4D4" height="300" v-on="on"></v-sheet>
         </template>
+        
         <div>
-          <template v-if="!this.$store.state.died">
+          <template v-if="this.$store.state.died===false && this.$store.state.ate_feed>=20">
+            <img 
+            class="img" 
+            src="../assets/character/beeadult.png" 
+            width="300"
+          /></template>
+          <template v-else-if="!this.$store.state.died">
             <img
               class="img"
               src="../assets/character/beechild.png"
               width="300"
             />
           </template>
-          <template v-else>
-            <img class="img" src="../assets/character/beedie.png" width="300"
+          <template v-else-if="this.$store.state.died">
+            <img 
+            class="img" 
+            src="../assets/character/beedie.png" 
+            width="300"
           /></template>
+           
+
         </div>
+        
       </v-sheet>
       <p>エサの数{{ this.$store.state.now_feed }}個</p>
       <v-row>
+         
         <v-col offset="3">
-      <v-avatar class="feed" v-on:click="feed_consume()" color="#7C5736" size="120">
-        <span class="white--text headline">エサ</span>
-      </v-avatar>
+          <v-avatar class="feed" v-on:click="feed_consume()" color="#7C5736" size="120">
+            <span class="white--text headline">エサ</span>
+          </v-avatar>
         </v-col>
         <v-col>
       <router-link to="/Collection">
@@ -110,8 +124,9 @@ export default {
   },
   methods: {
     feed_consume() {
-      if (this.$store.state.now_feed > 0 && this.$store.state.hp < 7 ){
+      if (this.$store.state.now_feed > 0 && this.$store.state.hp < 7){
         this.$store.state.now_feed--;
+        this.$store.state.ate_feed++;
         this.$store.state.hp++;
       }else if(this.$store.state.hp===7){
         this.alert=true;
@@ -142,7 +157,8 @@ export default {
       },
       {
         deep: true,
-      }
+      },
+      
     );
   },
   components: {
