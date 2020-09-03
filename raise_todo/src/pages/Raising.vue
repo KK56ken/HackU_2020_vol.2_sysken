@@ -15,7 +15,17 @@
           </div>
         </v-col>
       </v-row>
-
+  
+      <v-alert 
+        width="350"
+        color="red darken-1"
+        dark
+        transition="scale-transition"
+        :value="alert"
+      >
+        うぅ...おなかいっぱいだよ〜
+      </v-alert>
+     
       <v-sheet color="#D4D4D4" height="300" width="350">
         <template v-slot:activator="{ on }">
           <v-sheet color="#D4D4D4" height="300" v-on="on"></v-sheet>
@@ -36,7 +46,7 @@
       <p>エサの数{{ this.$store.state.now_feed }}個</p>
       <v-row>
         <v-col offset="3">
-      <v-avatar v-on:click="feed_consume()" color="#7C5736" size="120">
+      <v-avatar class="feed" v-on:click="feed_consume()" color="#7C5736" size="120">
         <span class="white--text headline">エサ</span>
       </v-avatar>
         </v-col>
@@ -84,6 +94,7 @@ export default {
       hp: 7,
       feed_num: 10,
       count: 0,
+      alert:false,
     };
   },
   created() {
@@ -91,6 +102,7 @@ export default {
     this.startTime =
       date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     setInterval(() => {
+      this.alert=false;
       var date = new Date();
       this.nowTime =
         date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
@@ -101,6 +113,8 @@ export default {
       if (this.$store.state.now_feed > 0 && this.$store.state.hp < 7 ){
         this.$store.state.now_feed--;
         this.$store.state.hp++;
+      }else if(this.$store.state.hp===7){
+        this.alert=true;
       }
     },
   },
