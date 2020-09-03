@@ -27,14 +27,10 @@ func SelectGettingTodo(token string) (Tasks, error) {
 	if err != nil {
 		panic(err.Error())
 	}
-
 	var rowUserId string
-
 	if err := db.QueryRow("SELECT user_id FROM users WHERE token = ?", token).Scan(&rowUserId); err != nil {
 		log.Fatal(err)
 	}
-
-	fmt.Println(rowUserId)
 
 	rows, err := db.Query("SELECT * FROM tasks WHERE user_id = ? ", rowUserId)
 	//rows, err := db.Query("SELECT * FROM tasks WHERE user_id = ?", user_id)

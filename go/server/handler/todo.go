@@ -2,7 +2,6 @@ package handler
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 
@@ -18,30 +17,38 @@ type todoList struct {
 	RegisterDate string `json:"register_date"`
 	EndDate      string `json:"end_date"`
 }
+
+// リクエスト(送られてきた値
+type addTodoListRequest struct {
+	Token   string `json:"token"`
+	Name    string `json:"name"`
+	Limit   string `json:"time_limite"`
+	Subject string `json:"subject"`
+}
+
+// レスポンス(返す値
+type addTodoListResponse struct {
+	Name    string `json:"name"`
+	Limit   string `json:"time_limite"`
+	Subject string `json:"subject"`
+}
+
 type todoListResponse struct {
 	Todos []todoList `json:"todos"`
 }
-type addTodoListRequest struct {
-	Token     string `json:"token"`
-	Name      string `json:"name"`
-	Limit     string `json:"time_limite"`
-	SubjectId int    `json:"subject_id"`
-}
-type addTodoListResponse struct {
-	Name      string `json:"name"`
-	Limit     string `json:"time_limite"`
-	SubjectId int    `json:"subject_id"`
-}
 
-type ToDoGet struct {
+// todo全件取得 リクエスト
+type ToDoGetAllRequest struct {
 	Token string `json:"token"`
 }
 
-func HandleToDoGet() http.HandlerFunc {
+// todo OK
+// todo全件取得
+func HandleToDoGetAll() http.HandlerFunc {
 	return func(writer http.ResponseWriter, request *http.Request) {
 
 		// リクエストBodyから更新後情報を取得
-		var requestBody ToDoGet
+		var requestBody ToDoGetAllRequest
 		if err := json.NewDecoder(request.Body).Decode(&requestBody); err != nil {
 			log.Println(err)
 			response.InternalServerError(writer, "Internal Server Error")
@@ -49,7 +56,6 @@ func HandleToDoGet() http.HandlerFunc {
 		}
 
 		todoListAlls, err := model.SelectGettingTodo(requestBody.Token)
-		//todoListAlls, err := model.SelectGettingTodo()
 		if err != nil {
 			log.Println(err)
 			response.InternalServerError(writer, "Internal Server Error")
@@ -61,9 +67,6 @@ func HandleToDoGet() http.HandlerFunc {
 		for i, to := range todoListAlls {
 
 			subject = ""
-
-			fmt.Println(to.SubjectId)
-
 			switch to.SubjectId {
 			case 1:
 				subject = "国語"
@@ -87,7 +90,6 @@ func HandleToDoGet() http.HandlerFunc {
 				EndDate:      to.EndDate,      //終了日時
 			}
 		}
-
 		response.Success(writer, &todoListResponse{
 			Todos: todoLists,
 		})
@@ -104,14 +106,30 @@ func HandleToDoPost() http.HandlerFunc {
 			response.InternalServerError(writer, "Internal Server Error")
 			return
 		}
-		user_id := model.SelectUserId(requestBody.Token)
-		subject_id := requestBody.SubjectId
+		userId := model.SelectUserId(requestBody.Token)
+		subject := requestBody.Subject
 		name := requestBody.Name
 		limit := requestBody.Limit
 
+		subjectId := 0
+		switch requestBody.Subject {
+		case "国語":
+			subjectId = 1
+		case "算数":
+			subjectId = 2
+		case "英語":
+			subjectId = 3
+		case "理科":
+			subjectId = 4
+		case "社会":
+			subjectId = 5
+		case "その他":
+			subjectId = 6
+		}
+
 		err := model.InsertTodo(&model.Task{
-			UserId:    user_id,
-			SubjectId: requestBody.SubjectId,
+			UserId:    userId,
+			SubjectId: subjectId,
 			Name:      requestBody.Name,
 			Limit:     requestBody.Limit,
 		})
@@ -123,9 +141,9 @@ func HandleToDoPost() http.HandlerFunc {
 		}
 
 		response.Success(writer, &addTodoListResponse{
-			SubjectId: subject_id,
-			Name:      name,
-			Limit:     limit,
+			Subject: subject,
+			Name:    name,
+			Limit:   limit,
 		})
 	}
 }
@@ -140,14 +158,31 @@ func HandleToDoEnd() http.HandlerFunc {
 			response.InternalServerError(writer, "Internal Server Error")
 			return
 		}
-		user_id := model.SelectUserId(requestBody.Token)
-		subject_id := requestBody.SubjectId
+
+		userId := model.SelectUserId(requestBody.Token)
+		subject := requestBody.Subject
 		name := requestBody.Name
 		limit := requestBody.Limit
 
+		subjectId := 0
+		switch requestBody.Subject {
+		case "国語":
+			subjectId = 1
+		case "算数":
+			subjectId = 2
+		case "英語":
+			subjectId = 3
+		case "理科":
+			subjectId = 4
+		case "社会":
+			subjectId = 5
+		case "その他":
+			subjectId = 6
+		}
+
 		err := model.InsertTodoEnd(&model.Task{
-			UserId:    user_id,
-			SubjectId: requestBody.SubjectId,
+			UserId:    userId,
+			SubjectId: subjectId,
 			Name:      requestBody.Name,
 			Limit:     requestBody.Limit,
 		})
@@ -159,9 +194,9 @@ func HandleToDoEnd() http.HandlerFunc {
 		}
 
 		response.Success(writer, &addTodoListResponse{
-			SubjectId: subject_id,
-			Name:      name,
-			Limit:     limit,
+			Name:    name,
+			Limit:   limit,
+			Subject: subject,
 		})
 	}
 }
