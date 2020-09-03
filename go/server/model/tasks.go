@@ -95,3 +95,18 @@ func InsertTodo(record *Task) error {
 	_, err = stmt.Exec(record.UserId, record.SubjectId, record.Name, record.Limit, 0, "0")
 	return err
 }
+
+func InsertTodoEnd(record *Task) error {
+	db, err := sql.Open("mysql", "root:root@tcp(hacku_db:3306)/raise_todo")
+	if err != nil {
+		panic(err.Error())
+	}
+	// userテーブルへのレコードの登録を行うSQLを入力する
+	// "UPDATE tbl_users set password = ? where name = ? "
+	stmt, err := db.Prepare("UPDATE tasks SET end_flag = 1 WHERE user_id = ? AND subject_id = ? AND name = ? AND time_limite = ?")
+	if err != nil {
+		return err
+	}
+	_, err = stmt.Exec(record.UserId, record.SubjectId, record.Name, record.Limit)
+	return err
+}

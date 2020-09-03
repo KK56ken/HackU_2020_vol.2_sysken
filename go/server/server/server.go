@@ -20,6 +20,8 @@ func Serve(addr string) {
 	// post
 	//　todoの登録
 	http.HandleFunc("/todo/register", post(handler.HandleToDoPost()))
+	// todoの終了
+	http.HandleFunc("/todo/end", post(handler.HandleToDoEnd()))
 	// user登録
 	http.HandleFunc("/user/signup", post(handler.HandleUserSignup()))
 	// 餌

@@ -93,6 +93,7 @@ func HandleToDoGet() http.HandlerFunc {
 		})
 	}
 }
+
 func HandleToDoPost() http.HandlerFunc {
 	return func(writer http.ResponseWriter, request *http.Request) {
 
@@ -109,6 +110,42 @@ func HandleToDoPost() http.HandlerFunc {
 		limit := requestBody.Limit
 
 		err := model.InsertTodo(&model.Task{
+			UserId:    user_id,
+			SubjectId: requestBody.SubjectId,
+			Name:      requestBody.Name,
+			Limit:     requestBody.Limit,
+		})
+
+		if err != nil {
+			log.Println(err)
+			response.InternalServerError(writer, "Internal Server Error ww")
+			return
+		}
+
+		response.Success(writer, &addTodoListResponse{
+			SubjectId: subject_id,
+			Name:      name,
+			Limit:     limit,
+		})
+	}
+}
+
+func HandleToDoEnd() http.HandlerFunc {
+	return func(writer http.ResponseWriter, request *http.Request) {
+
+		// リクエストBodyから更新後情報を取得
+		var requestBody addTodoListRequest
+		if err := json.NewDecoder(request.Body).Decode(&requestBody); err != nil {
+			log.Println(err)
+			response.InternalServerError(writer, "Internal Server Error")
+			return
+		}
+		user_id := model.SelectUserId(requestBody.Token)
+		subject_id := requestBody.SubjectId
+		name := requestBody.Name
+		limit := requestBody.Limit
+
+		err := model.InsertTodoEnd(&model.Task{
 			UserId:    user_id,
 			SubjectId: requestBody.SubjectId,
 			Name:      requestBody.Name,
