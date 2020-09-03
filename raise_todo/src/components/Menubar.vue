@@ -3,9 +3,11 @@
     <v-bottom-navigation
     horizontal
     >
+    
       <router-link to="/">
-        <v-btn dark > 
-          <span>{{btnname}}</span>
+        <v-btn > 
+          <v-icon>mdi-home</v-icon> 
+          {{btnname}}
         </v-btn>
       </router-link>
     </v-bottom-navigation>

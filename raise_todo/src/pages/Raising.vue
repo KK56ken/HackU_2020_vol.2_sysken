@@ -98,7 +98,7 @@ export default {
   },
   methods: {
     feed_consume() {
-      if (this.$store.state.now_feed > 0) {
+      if (this.$store.state.now_feed > 0 && this.$store.state.hp < 7 ){
         this.$store.state.now_feed--;
         this.$store.state.hp++;
       }
