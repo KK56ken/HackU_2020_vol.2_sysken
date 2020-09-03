@@ -21,14 +21,22 @@ type Task struct {
 
 type Tasks []*Task
 
-func SelectGettingTodo(user_id int) (Tasks, error) {
+func SelectGettingTodo(token string) (Tasks, error) {
 
 	db, err := sql.Open("mysql", "root:root@tcp(hacku_db:3306)/raise_todo")
 	if err != nil {
 		panic(err.Error())
 	}
 
-	rows, err := db.Query("SELECT * FROM tasks")
+	var rowUserId string
+
+	if err := db.QueryRow("SELECT user_id FROM users WHERE token = ?", token).Scan(&rowUserId); err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(rowUserId)
+
+	rows, err := db.Query("SELECT * FROM tasks WHERE user_id = ? ", rowUserId)
 	//rows, err := db.Query("SELECT * FROM tasks WHERE user_id = ?", user_id)
 	if err != nil {
 		return nil, err
