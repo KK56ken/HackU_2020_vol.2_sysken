@@ -12,62 +12,66 @@
                 >➕</v-btn
               >
             </template>
-            <v-card>
-              <v-card-title>
-                <span class="headline">Todoリスト</span>
-              </v-card-title>
-              <v-card-text>
-                <v-container>
-                  <v-row>
-                    <v-col cols="12">
-                      <v-text-field
-                        :rules="toRules"
-                        label="やること"
-                        required
-                        v-model="title"
-                      ></v-text-field>
-                    </v-col>
+            <v-form ref="form" v-model="valid" lazy-validation>
+              <v-card>
+                <v-card-title>
+                  <span class="headline">Todoリスト</span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12">
+                        <v-text-field
+                          :rules="toRules"
+                          label="やること"
+                          required
+                          v-model="title"
+                        ></v-text-field>
+                      </v-col>
 
-                    <v-col cols="12">
-                      <!-- <v-text-field label="いつまで" required v-model="date"></v-text-field> -->
+                      <v-col cols="12">
+                        <!-- <v-text-field label="いつまで" required v-model="date"></v-text-field> -->
 
-                      日付： {{ date }}
-                      <DatePicker v-model="date" />
-                    </v-col>
-                    <v-col cols="12" sm="6">
-                      <v-select
-                        :items="[
-                          '国語',
-                          '算数',
-                          '理科',
-                          '社会',
-                          '英語',
-                          'その他',
-                        ]"
-                        label="科目"
-                        required
-                        v-model="subject"
-                        :rules="subjetRules"
-                      ></v-select>
-                    </v-col>
-                  </v-row>
-                </v-container>
-                <!-- <small>*indicates required field</small> -->
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="dialog = false"
-                  >閉じる</v-btn
-                >
-                <v-btn
-                  color="blue darken-1"
-                  text
-                  v-on:click="store_add_todo(), number_of_days_left()"
-                  :disabled="!valid"
-                  >保存する</v-btn
-                >
-              </v-card-actions>
-            </v-card>
+                        日付： {{ date }}
+                        <DatePicker v-model="date" />
+                      </v-col>
+                      <v-col cols="12" sm="6">
+                        <v-select
+                          :items="[
+                            '国語',
+                            '算数',
+                            '理科',
+                            '社会',
+                            '英語',
+                            'その他',
+                          ]"
+                          label="科目"
+                          required
+                          v-model="subject"
+                          :rules="subjetRules"
+                        ></v-select>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                  <!-- <small>*indicates required field</small> -->
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="blue darken-1" text @click="dialog = false"
+                    >閉じる</v-btn
+                  >
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    v-on:click="
+                      resetValidation(), store_add_todo(), number_of_days_left()
+                    "
+                    :disabled="!valid"
+                    >保存する</v-btn
+                  >
+                </v-card-actions>
+              </v-card>
+            </v-form>
           </v-dialog>
         </v-col>
       </v-row>
@@ -224,10 +228,11 @@ export default {
         );
       }
     },
-    validate() {
-      this.$refs.form.validate();
+    resetValidation() {
+      this.$refs.form.resetValidation();
     },
   },
+
   created() {
     var date = new Date();
     this.$store.state.year = date.getFullYear();
