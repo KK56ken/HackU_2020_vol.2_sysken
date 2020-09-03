@@ -102,6 +102,9 @@ export default {
         this.$store.state.now_feed--;
         this.$store.state.hp++;
       }
+      if(this.$store.state.hp > 7){
+        this.$store.state.hp=7;
+      }
     },
   },
   watch: {
