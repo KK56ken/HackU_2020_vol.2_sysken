@@ -33,6 +33,7 @@ export default new Vuex.Store({
     post_new_todo(context, todo) {
       axios
         .post("http://127.0.0.1:3001/todo/register", {
+          token:"aaa",
           name: todo.title,
           time_limite: todo.date,
           subject_id: todo.subject,
