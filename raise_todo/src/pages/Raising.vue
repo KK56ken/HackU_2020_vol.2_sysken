@@ -122,9 +122,14 @@ export default {
         date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     }, 10000);
   },
-  methods: {
+  methods: {    
     feed_consume() {
       if (this.$store.state.now_feed > 0 && this.$store.state.hp < 7){
+        this.$store.dispatch("post_add_feed",{
+          token:this.$store.state.user.token,
+          flag:0,
+          feed_num:this.subject_num,
+        });
         this.$store.state.now_feed--;
         this.$store.state.ate_feed++;
         this.$store.state.hp++;

@@ -33,7 +33,6 @@ export default new Vuex.Store({
     post_new_todo(context, todo) {
       axios
         .post("http://127.0.0.1:3001/todo/register", {
-          token: "aaa",
           name: todo.title,
           time_limite: todo.date,
           subject_id: todo.subject,
@@ -49,6 +48,7 @@ export default new Vuex.Store({
             console.log("送れなかった");
           }
         });
+        
     },
     post_new_user(context, user) {
       axios
@@ -60,6 +60,25 @@ export default new Vuex.Store({
           console.log(res.data);
           if (res.data) {
             context.commit("set_user", res.data);
+          }
+        })
+        .catch((err) => {
+          if (err.response) {
+            console.log("送れなかった");
+          }
+        });
+    },
+    post_add_feed(context,feed){
+      axios
+        .post("http://127.0.0.1:3001/raise/feed",{
+          token:feed.token,
+          flag:feed.flag,
+          feednum:feed.feed_num,
+        })
+        .then((res) => {
+          console.log("送れた");
+          if (res.data) {
+            console.log(res.date);
           }
         })
         .catch((err) => {
