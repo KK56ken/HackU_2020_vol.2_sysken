@@ -101,7 +101,7 @@
             v-for="(one_todo, i) in this.$store.state.todos"
             :key="i"
           >
-            <TodoCard :todo="one_todo" :aday="day" />
+            <TodoCard :todo="one_todo" />
           </v-col>
         </v-row>
         <!-- <v-row
@@ -146,7 +146,6 @@ export default {
     Menubar,
   },
   data: () => ({
-    day: 0,
     offsetTop: 0,
     valid: true,
     title: "",
