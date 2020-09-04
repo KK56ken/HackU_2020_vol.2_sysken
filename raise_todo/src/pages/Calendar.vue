@@ -92,10 +92,35 @@
             ></v-calendar>
             <v-dialog v-model="dialog" width="500">
               <v-card>
-                <template v-for="todo_name in today_list">
-                  {{ todo_name }}</template
+                <v-col>
+                  <v-row
+                    class="#F29993"
+                    justify="center"
+                    align-content="center"
+                  >
+                    <v-col
+                      cols="12"
+                      sm="10"
+                      md="8"
+                      lg="4"
+                      xl="3"
+                      v-for="(todo_name, i) in today_list"
+                      :key="i"
+                    >
+                      <v-card height="100" class="name">
+                        {{ todo_name }}
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                </v-col>
+
+                <v-btn
+                  height="50"
+                  width="100%"
+                  color="primary"
+                  @click="dialog = false"
+                  >戻る</v-btn
                 >
-                <v-btn color="primary" text @click="dialog = false">戻る</v-btn>
               </v-card>
             </v-dialog>
           </v-sheet>
@@ -178,8 +203,10 @@ export default {
         if (todo.date === date) {
           this.today_list.push(todo.name);
         }
-        this.dialog = true;
       });
+      if (this.today_list.length > 0) {
+        this.dialog = true;
+      }
     },
     getEventColor(event) {
       return event.color;
@@ -248,5 +275,8 @@ export default {
 }
 h1 {
   color: #6b421d !important;
+}
+.name {
+  font-size: 30px;
 }
 </style>
