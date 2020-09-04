@@ -62,10 +62,10 @@ export default {
       this.$store.state.now_feed++;
       
       this.$store.dispatch("post_new_food", {
-        
+
         token:this.$store.state.user.token,
         flag:1,
-        feednum:this.feednum,
+        feednum:1
     });
     
     },
