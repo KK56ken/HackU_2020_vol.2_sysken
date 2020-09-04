@@ -92,8 +92,8 @@
             ></v-calendar>
             <v-dialog v-model="dialog" width="500">
               <v-card>
-                <v-template v-for="(todo_name, i) in today_list" :key="i">
-                  {{ todo_name }}</v-template
+                <template v-for="todo_name in today_list">
+                  {{ todo_name }}</template
                 >
                 <v-btn color="primary" text @click="dialog = false">戻る</v-btn>
               </v-card>
