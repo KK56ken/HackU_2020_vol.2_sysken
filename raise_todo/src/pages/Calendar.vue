@@ -92,15 +92,10 @@
             ></v-calendar>
             <v-dialog v-model="dialog" width="500">
               <v-card>
-                <v-card-text v-for="(list, i) in today_list" :key="i">{{
-                  list
-                }}</v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="primary" text @click="dialog = false"
-                    >戻る</v-btn
-                  >
-                </v-card-actions>
+                <v-template v-for="(todo_name, i) in today_list" :key="i">
+                  {{ todo_name }}</v-template
+                >
+                <v-btn color="primary" text @click="dialog = false">戻る</v-btn>
               </v-card>
             </v-dialog>
           </v-sheet>
@@ -133,6 +128,7 @@ export default {
     Menubar,
   },
   data: () => ({
+    day_list: [],
     lists: [],
     focus: "",
     dialog: false,
@@ -170,7 +166,11 @@ export default {
   mounted() {
     // this.$refs.calendar.checkChange();
   },
-  created() {},
+  created() {
+    this.$store.state.todos.forEach((todo) => {
+      this.day_list.push(todo.date);
+    });
+  },
   methods: {
     display({ date }) {
       this.today_list = [];
