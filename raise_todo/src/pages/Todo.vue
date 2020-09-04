@@ -8,12 +8,12 @@
         <v-col cols="5" sm="6" md="4" lg="3">
           <v-dialog v-model="dialog" max-width="600px">
             <template v-slot:activator="{ on, attrs }">
-              <v-btn color="#F29993" dark v-bind="attrs" v-on="on" fab x-large
+              <v-btn color="light-green lighten-1" dark v-bind="attrs" v-on="on" fab x-large
                 >➕</v-btn
               >
             </template>
-            <v-form ref="form" v-model="valid" lazy-validation>
-              <v-card>
+            <v-form ref="form" v-model="valid" lazy-validation >
+              <v-card  >
                 <v-card-title>
                   <span class="headline">Todoリスト</span>
                 </v-card-title>
@@ -26,6 +26,8 @@
                           label="やること"
                           required
                           v-model="title"
+                          
+
                         ></v-text-field>
                       </v-col>
 
@@ -33,7 +35,7 @@
                         <!-- <v-text-field label="いつまで" required v-model="date"></v-text-field> -->
 
                         日付： {{ date }}
-                        <DatePicker v-model="date" />
+                        <datePicker v-model="date"/>
                       </v-col>
                       <v-col cols="12" sm="6">
                         <v-select
@@ -77,21 +79,11 @@
       </v-row>
     </v-container>
     <v-container>
-      <v-sheet
-        id="scroll-target"
-        class="overflow-y-auto"
-        color="grey lighten-3"
-        height="424"
-      >
+      <v-sheet color="lime lighten-3" height="424">
         <template v-if="this.$store.state.nodl"
           >のこり {{ this.$store.state.nodl }}日</template
         >
-        <v-row
-          class="#F29993"
-          justify="center"
-          align-content="center"
-          v-scroll:#scroll-target="onScroll"
-        >
+        <v-row class="#F29993" justify="center" align-content="center">
           <v-col
             cols="12"
             sm="10"
@@ -145,8 +137,8 @@ export default {
     DatePicker,
     Menubar,
   },
+  
   data: () => ({
-    offsetTop: 0,
     valid: true,
     title: "",
     subject_num: 0,
@@ -159,7 +151,10 @@ export default {
     subjetRules: [(v) => !!v || "科目を選択してね"],
     dialog: false,
   }),
+  
   methods: {
+    
+
     store_add_todo() {
       switch (this.subject) {
         case "国語":
@@ -197,7 +192,9 @@ export default {
         this.subject_num = 0;
         this.dialog = false;
       }
+      
     },
+    
     number_of_days_left() {
       var tmp = this.$store.state.todos[0].date.substr(5, 7);
       var todo_month = Number(tmp.substr(0, 2));
@@ -242,9 +239,6 @@ export default {
     resetValidation() {
       this.$refs.form.resetValidation();
     },
-    onScroll(e) {
-      this.offsetTop = e.target.scrollTop;
-    },
   },
 
   created() {
@@ -253,6 +247,7 @@ export default {
     this.$store.state.month = date.getMonth() + 1;
     this.$store.state.today = date.getDate();
   },
+  
 };
 </script>
 <style>

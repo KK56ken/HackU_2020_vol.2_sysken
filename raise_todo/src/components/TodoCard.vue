@@ -2,21 +2,21 @@
   <v-row v-if="show">
     <v-col cols="12" sm="12" md="4" lg="3">
       <!-- <p>あと3日</p> -->
-      <v-card class="mx-auto" height="100" width="350">
+      <v-card class="mx-auto" height="100%" width="98%">
         <v-card-text>
-          <div class="todo_name  text--primary">
+          <div class="todo_name text--primary">
             {{ todo.name }}
-            <v-btn
-              class="text-right"
-              text
-              color="deep-purple accent-4"
-              @click.stop="dialog = true"
-              >終了</v-btn
-            >
           </div>
           <span class="end_date text--primary"> 提出日：{{ todo.date }} </span>
           <span class="h4 text--primary">科目：{{ todo.subject }}</span>
-
+           <v-spacer></v-spacer>
+          <v-btn
+              dark
+              class="text-right"
+              color="green darken-1"
+              @click.stop="dialog = true"
+              >終了</v-btn
+            >
           <v-dialog v-model="dialog" max-width="290">
             <v-card>
               <v-card-title class="headline">本当に消していいの？</v-card-title>
@@ -73,7 +73,6 @@ export default {
 .todo_name {
   padding-top: 10px;
   padding-left: 0;
-  padding-right: 100px;
   padding-bottom: 10px;
   font-size: 30px;
 }
