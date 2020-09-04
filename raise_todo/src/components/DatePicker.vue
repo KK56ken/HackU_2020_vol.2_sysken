@@ -6,7 +6,7 @@
       </v-btn>
     </template>
     <v-date-picker
-      :min="created()"
+      :min="this.day"
       v-model="picker"
       @click="menu = false"
       locale="ja-jp"
@@ -24,6 +24,7 @@ export default {
   },
   data() {
     return {
+      day: 0,
       menu: false,
       today: new Date(),
     };
@@ -40,12 +41,12 @@ export default {
     },
   },
   created() {
-    var a = 0;
+    var day = 0;
     if (
       String(this.$store.state.month).length === 1 &&
       String(this.$store.state.today).length === 1
     ) {
-      a =
+      day =
         this.$store.state.year +
         "-" +
         "0" +
@@ -54,7 +55,7 @@ export default {
         "0" +
         this.$store.state.today;
     } else if (String(this.$store.state.month).length === 1) {
-      a =
+      day =
         this.$store.state.year +
         "-" +
         "0" +
@@ -62,7 +63,7 @@ export default {
         "-" +
         this.$store.state.today;
     } else if (String(this.$store.state.today).length === 1) {
-      a =
+      day =
         this.$store.state.year +
         "-" +
         this.$store.state.month +
@@ -70,14 +71,14 @@ export default {
         "0" +
         this.$store.state.today;
     } else {
-      a =
+      day =
         this.$store.state.year +
         "-" +
         this.$store.state.month +
         "-" +
         this.$store.state.today;
     }
-    return a;
+    this.day = day;
   },
 };
 </script>
