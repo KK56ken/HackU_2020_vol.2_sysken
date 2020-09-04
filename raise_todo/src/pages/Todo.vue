@@ -79,7 +79,7 @@
       </v-row>
     </v-container>
     <v-container>
-      <v-sheet color="lime lighten-3" height="424">
+      <v-sheet color="lime lighten-3" height="520">
         <template v-if="this.$store.state.nodl"
           >のこり {{ this.$store.state.nodl }}日</template
         >
