@@ -88,6 +88,26 @@ export default new Vuex.Store({
           }
         });
     },
+    post_new_food(context,feed){
+      axios
+       .post("http://127.0.0.1:3001/raise/feed",{
+         token:feed.token,
+         flag:feed.flag,
+         feednum:feed.feednum,
+
+       })
+       .then((res) => {
+        console.log("送れた");
+        if (res.data) {
+          console.log(res.date);
+        }
+      })
+      .catch((err) => {
+        if (err.response) {
+          console.log("送れなかった");
+        }
+      });
+    }
   },
   modules: {},
 });
