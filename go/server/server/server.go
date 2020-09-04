@@ -13,13 +13,15 @@ func Serve(addr string) {
 	//http.HandleFunc("/", handler.kkk)
 	// get
 	// todo全件取得
-	http.HandleFunc("/todo/get", get(handler.HandleToDoGet()))
+	http.HandleFunc("/todo/get", get(handler.HandleToDoGetAll()))
 	//　ユーザーのログイン
 	http.HandleFunc("/user/login", get(handler.HandleUserLogin()))
 
 	// post
 	//　todoの登録
 	http.HandleFunc("/todo/register", post(handler.HandleToDoPost()))
+	// todoの終了
+	http.HandleFunc("/todo/end", post(handler.HandleToDoEnd()))
 	// user登録
 	http.HandleFunc("/user/signup", post(handler.HandleUserSignup()))
 	// 餌

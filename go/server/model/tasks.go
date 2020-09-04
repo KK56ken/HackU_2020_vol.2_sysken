@@ -27,14 +27,10 @@ func SelectGettingTodo(token string) (Tasks, error) {
 	if err != nil {
 		panic(err.Error())
 	}
-
 	var rowUserId string
-
 	if err := db.QueryRow("SELECT user_id FROM users WHERE token = ?", token).Scan(&rowUserId); err != nil {
 		log.Fatal(err)
 	}
-
-	fmt.Println(rowUserId)
 
 	rows, err := db.Query("SELECT * FROM tasks WHERE user_id = ? ", rowUserId)
 	//rows, err := db.Query("SELECT * FROM tasks WHERE user_id = ?", user_id)
@@ -93,5 +89,20 @@ func InsertTodo(record *Task) error {
 		return err
 	}
 	_, err = stmt.Exec(record.UserId, record.SubjectId, record.Name, record.Limit, 0, "0")
+	return err
+}
+
+func InsertTodoEnd(record *Task) error {
+	db, err := sql.Open("mysql", "root:root@tcp(hacku_db:3306)/raise_todo")
+	if err != nil {
+		panic(err.Error())
+	}
+	// userテーブルへのレコードの登録を行うSQLを入力する
+	// "UPDATE tbl_users set password = ? where name = ? "
+	stmt, err := db.Prepare("UPDATE tasks SET end_flag = 1 WHERE user_id = ? AND subject_id = ? AND name = ? AND time_limite = ?")
+	if err != nil {
+		return err
+	}
+	_, err = stmt.Exec(record.UserId, record.SubjectId, record.Name, record.Limit)
 	return err
 }
