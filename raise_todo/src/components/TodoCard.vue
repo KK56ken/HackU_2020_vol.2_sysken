@@ -60,7 +60,16 @@ export default {
   methods: {
     add_food() {
       this.$store.state.now_feed++;
+      
+      this.$store.dispatch("post_new_food", {
+
+        token:this.$store.state.user.token,
+        flag:1,
+        feednum:1
+    });
+    
     },
+    
     card_destroy() {
       this.$destroy;
     },
