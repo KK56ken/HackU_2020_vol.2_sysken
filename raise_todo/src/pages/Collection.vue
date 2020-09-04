@@ -8,8 +8,7 @@
           <v-divider> </v-divider>
         </v-col>
       </v-row>
- 
-      <v-sheet color="#D4D4D4" height="500" >
+      <v-sheet color="#D4D4D4" height="600" >
         <v-row>
           <v-col cols="3" class="ma-2"> 
             <v-sheet  width="100" height="100">
@@ -72,12 +71,13 @@
             </v-sheet>
           </v-col> 
 
-        </v-row>
-      </v-sheet>
+          </v-row>
+          </v-sheet>
+      
     </v-container>
-    <v-container>
+    
      <ColleMenubar btnname="ホーム" Rname="育成"></ColleMenubar>
-    </v-container>
+    
   </div>
 </template>
 

@@ -1,12 +1,15 @@
 <template>
-  <v-container>
-    <router-link to="/">
-      <v-btn width="360" height="50">
-        <v-icon>mdi-home</v-icon>
-        <h2 font-weight="50">{{ btnname }}</h2>
-      </v-btn>
-    </router-link>
-  </v-container>
+<router-link to="/">
+ <v-footer
+    absolute
+    height="50"
+    color="brown lighten-1"
+    dark
+    >
+    <v-icon large>mdi-home</v-icon>
+    <h2 font-weight="50">{{ btnname }}</h2>
+ </v-footer>
+ </router-link>
 </template>
 
 <script>
