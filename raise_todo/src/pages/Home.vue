@@ -2,8 +2,6 @@
   <div class="home">
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <v-container>
-      
-        
       <Title titlename="スッカ" size="6" />
       <v-row>
       <v-col offset="5">
