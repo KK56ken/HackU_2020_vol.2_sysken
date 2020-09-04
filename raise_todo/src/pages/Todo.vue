@@ -30,6 +30,16 @@
 
                         ></v-text-field>
                       </v-col>
+                      <v-col cols="12">
+                        <v-text-field
+                                :rules="toRulesS"
+                                label="提出場所"
+                                required
+                                v-model="submission"
+
+
+                        ></v-text-field>
+                      </v-col>
 
                       <v-col cols="12">
                         <!-- <v-text-field label="いつまで" required v-model="date"></v-text-field> -->
@@ -143,8 +153,10 @@ export default {
     title: "",
     subject_num: 0,
     toRules: [(v) => !!v || "やることを入力してね"],
+    toRulesS: [(v) => !!v || "提出場所を入力してね"],
     select: null,
     items: ["国語", "算数", "理科", "社会", "英語", "その他"],
+    submission: "", //提出場所
     date: "",
     dataRules: [(v) => !!v || "日付を選択してね"],
     subject: "",
